@@ -1,157 +1,488 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-	<link rel="shortcut icon" href="./pic/cuhk.ico">
-	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-	<meta name="keywords" content="Jie Yang">
-	<meta name="description" content="Jie Yang's home page">
-	<meta name="google-site-verification" content="xg04VgCH_1GseFDVDJUDOU2fWPkMU61koxePfxI9L2U" />
-	<link rel="stylesheet" href="jemdoc.css" type="text/css">
-	<title>Jie Yang&#39;s Homepage</title>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="UniPose: Detecting Any Keypoints">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>UniPose: Detecting Any Keypoints</title>
+  <style>
+    /* 段落文字的样式 */
+    .paragraph {
+      font-size: 1.5em; /* 设置较大的字体大小 */
+      margin-top: 0.5em; /* 可以根据需要调整段落间的间距 */
+      text-align: left; /* 左对齐文本 */
+    }
+
+    /* 前导点的样式 */
+    .dot {
+      margin-right: 0.5em; /* 调整前导点与文字之间的距离 */
+      font-size: inherit; /* 继承文字的字体大小 */
+      line-height: inherit; /* 继承文字的行高 */
+    }
+  </style>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y5ZVQZ7NHC"></script> -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <!-- <link rel="icon" href="./static/images/favicon.svg"> -->
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js_slide/fontawesome.all.min.js"></script>
+  <script src="./static/js_slide/bulma-carousel.min.js"></script>
+  <script src="./static/js_slide/bulma-slider.min.js"></script>
+  <script src="./static/js_slide/index.js"></script>
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+
+  <!-- Vendor Stylesheets -->
+  <!--=================js==========================-->
+  <link rel="stylesheet" href="./static/css/tab_gallery.css">
+  <link rel="stylesheet" href="./static/css/juxtapose.css">
+  <link rel="stylesheet" href="./static/css/image_card_fader.css">
+  <link rel="stylesheet" href="./static/css/image_card_slider.css">
 </head>
 <body>
-	<!-- <nav class="navbar navbar-dark navbar-expand-lg fixed-top">
-		<div id="layout-menu">
-			<a href="#publication">Publication</a>
-			<a href="#experience">Experience</a>
-			<a href="#service">Service</a>
-			<a href="#presentation">Presentation</a>
-			<a href="#award">Award</a>
-			<a href="#patent">Patent</a>
-			<a href="#teaching">Teaching</a>
-		</div>
-	</nav> -->
-<div id="layout-content" style="margin-top:25px">
-	
-<table>
-	<tbody>
-		<tr>
-			<td width="670">
-				<div id="toptitle">
-					<h1></h1>
-					<h1>Jie Yang &nbsp;&nbsp;<font face="Arial">杨杰</font></h1>
-				</div>
-
-				<h3>PhD Student</h3>
-				<p>
-					Computer and Information Engineering<br>
-					The Chinese University of Hong Kong, Shenzhen<br>
-					<br>
-					Email: <a href="mailto:jieyang5@link.cuhk.edu.cn">jieyang5@link.cuhk.edu.cn</a><br>
-				</p>
-				<p>
-					<a href="https://scholar.google.com/citations?user=UVzG9IcAAAAJ&hl=zh-CN"><img src="./pic/google_scholar.png" height="30px" style="margin-bottom:-3px"></a>
-					<a href="https://github.com/yangjie-cv"><img src="./pic/github_s.jpg" height="30px" style="margin-bottom:-3px"></a>
-				</p>
-			</td>
-			<td>
-				<img src="./pic/yangjie.jpg" border="0" width="200" style="margin-right: 50px;"><br>
-			</td>
-		</tr><tr>
-	</tr></tbody>
-</table>
-
-<h2>Biography</h2>
-<p>
-	I am a second-year PhD student in the	<a href="http://sse.cuhk.edu.cn/">School of Science and Engineering</a>,
-	<a href="http://www.cuhk.edu.cn/">The Chinese University of Hong Kong, Shenzhen</a>, 
-	co-supervised by <a href="http://www.zhangruimao.site/">Prof. Ruimao Zhang</a> and <a href="https://mypage.cuhk.edu.cn/academics/lizhen/">Prof. Zhen Li</a>. Currently, I am an intern of computer vision at International Digital Economy Academy (IDEA), advised by <a href="https://ailingzeng.site/">Dr. Ailing Zeng</a> and <a href="https://www.leizhang.org/">Prof. Lei Zhang</a>.
-</p>
-
-<p>My research interest lies in human-centric visual understanding, perception, and generation. </p>
-
-
-<h2>News</h2>
-<ul>
-	<li>
-		[2023.07.14] One paper is accepted to ICCV2023.
-	</li>
-		<li>
-		[2023.05.20] Check out our recent paper on <a href="https://arxiv.org/pdf/2305.12252.pdf"> Human-object Interaction Detection</a>.
-	</li>
-	<li>
-		[2023.03.02] Two papers are accepted to MIDL2023 and one is rated as the oral presentation.
-	</li>
-	<li>
-		[2023.02.28] One paper is accepted to CVPR2023.
-	</li>
-	<li>
-		[2023.01.21] One paper is accepted to ICLR2023.
-	</li>
-	<li>
-		[2022.09.17] One paper is accepted to NeurIPS2022.
-	</li>
-
-</ul>
-		<h2> Recent Publications [<a href="https://scholar.google.com/citations?user=UVzG9IcAAAAJ&hl=zh-CN">Google Scholar</a>]</h2>
-
-	<li><a href="">Neural Interactive Keypoint Detection
-</a><br>
-<b>Jie Yang</b>, Ailing Zeng*, Feng Li, Shilong Liu, Ruimao Zhang*, Lei Zhang.<br>
-IEEE International Conference on Computer Vision (<b>ICCV</b>), 2023.
-	</li>
-				
-				<li> <a href="https://arxiv.org/pdf/2305.12252.pdf">Boosting Human-Object Interaction Detection with Text-to-Image Diffusion Model
-</a><br>
-<b>Jie Yang</b>, Bingliang Li, Fengyu Yang, Ailing Zeng*, Lei Zhang, Ruimao Zhang*.<br>
-arXiv:2305.12252, Technical Report, 2023.
-  <br />
-</li>
-
-<li> <a href="https://openaccess.thecvf.com/content/CVPR2023/papers/Yang_Semantic_Human_Parsing_via_Scalable_Semantic_Transfer_Over_Multiple_Label_CVPR_2023_paper.pdf">Semantic Human Parsing via Scalable Semantic Transfer over Multiple Label Domains
-</a><br>
-<b>Jie Yang</b>, Chaoqun Wang, Zhen Li, Junle Wang, Ruimao Zhang*.<br>
-IEEE Conference on Computer Vision and Pattern Recognition (<b>CVPR</b>), 2023.
-</li>	
-
-				<li><a href="https://arxiv.org/pdf/2302.01593.pdf">Explicit Box Detection Unifies End-to-End Multi-Person Pose Estimation
-</a><br>
-<b>Jie Yang</b>, Ailing Zeng*, Shilong Liu, Feng Li, Ruimao Zhang*, Lei Zhang.<br>
-International Conference on Learning Representations (<b>ICLR</b>), 2023.
-</li>	
-				
-<li><a href="https://arxiv.org/pdf/2206.10571.pdf">Toward Unpaired Multi-modal Medical Image Segmentation via Learning Structured Semantic Consistency
-</a><br>
-<b>Jie Yang</b>, Ye Zhu, Chaoqun Wang, Zhen Li, Ruimao Zhang*.<br>
-International Conference on Medical Imaging with Deep Learning (<b>MIDL</b>), 2023.
-</li>
-
-</ul>				
-
-
-
-	<h2>Honors &amp; Awards</h2>
-		<ul>
-
-    <li><p> The First Prize Scholarship, 2018，2019，2020. </p></li>
-    <li><p> National Scholarship, 2018 </p></li>
-		</ul>
 
 
 
 
-		<div id="footer">
-			<div id="footer-text"></div>
-		</div>
-		<p>
-			<center>
-				<div id="clustrmaps-widget" style="width:40%">
-					<script type='text/javascript' id='clustrmaps'
-						src='//cdn.clustrmaps.com/map_v2.js?cl=ffffff&w=400&t=tt&d=yqzHjRzsBJQtkz3lH1jgeuQAOnTiZWl3UFnWM5FeXZM&cmo=ff0000&cmn=ffb800&ct=ffffff'></script>
-				</div>
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title"><span style="font-weight: bold; font-style: italic">UniPose : Detecting Any Keypoints</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://yangjie-cv.github.io/">Jie Yang</a><sup>1,2</sup>,</span>
+            <span class="author-block">
+              <a href="https://ailingzeng.site/">Ailing Zeng</a><sup>1*</sup>,</span>
+            <span class="author-block">
+              <a href="http://www.zhangruimao.site/">Ruimao Zhang</a><sup>2*</sup>,</span>
+            </span>
+            <span class="author-block">
+              <a href="https://www.leizhang.org/">Lei Zhang</a><sup>1</sup></span>
+            </span>
+          </div>
 
-				<br>&copy; Jie Yang | Last updated: March 2023
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>International Digital Economy Academy <br>
+              <sup>2</sup>Shenzhen Research Institute of Big Data, The Chinese University of Hong Kong, Shenzhen <br>
+              *corresponding author
+          </div>
 
-			</center>
-		</p>
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://readpaper.com/paper/2002445839294507520"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>ReadPaper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2310.08530"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/IDEA-Research/UniPose"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>  
+              <!-- huggingface Link. -->
+              <!-- <span class="link-block">
+                <a href="https://huggingface.co/spaces/ChenyangSi/FreeU"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-huggingface"></i>
+                  </span>
+                  <span>Huggingface Demo</span>
+                  </a>
+              </span> -->
+              <!-- Code Link. -->
+              <!-- <span class="link-block">
+                <a href="https://github.com/google/nerfies"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span> -->
+              <!-- Dataset Link. -->
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 
-	</div>
 
-</body>
+<!--=================Overview of UniPose==========================-->
+<section class="section" >
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Highlight</h2>
+        <!-- <h2 class="subtitle has-text-centered">We use eight metrics covering four aspects: structure distance, background preservation, edit prompt-image consistency, and inference time.</h2> -->
+        <div class="content has-text-justified">
+          <div style="text-align: center; vertical-align:middle">
+            <img src="unipose/figures/performance.png" width="600">
+          </div>
 
-</html>
-</body>
+          <!-- 第一句话，已加粗并且字体更大 -->
+          <p style="font-size: 1.2em; font-weight: bold; font-style: italic">
+            <span class="dot">&#8226;</span> We show the remarkable generalization capabilities of UniPose for unseen object and keypoint detection, which exhibits a notable 42.8% improvement in PCK
+            performance when compared to the state-of-the-art CAPE method.
+          </p>
 
-</html>
+          <!-- 第二句话，已加粗并且字体更大 -->
+          <p style="font-size: 1.2em; font-weight: bold;">
+            <span class="dot">&#8226;</span> UniPose outperforms
+            the state-of-the-art end-to-end model (e.g., ED-Pose) across 12 diverse datasets. Its performance
+            is also comparable with state-of-the-art expert models for object detection (e.g., GroundingDINO)
+            and keypoint detection (e.g., ViTPose++).
+          </p>
+
+          <!-- 第三句话，已加粗并且字体更大 -->
+          <p style="font-size: 1.2em; font-weight: bold;">
+            <span class="dot">&#8226;</span> UniPose exhibits impressive text-to-image
+            similarity at both instance and keypoint levels, notably surpassing CLIP by 204% when distinguishing between different animal categories and by 166% when discerning various image styles.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Overview: A Generalist Keypoint Detector</h2>
+
+        <!-- 第一句话，已加粗 -->
+        <p class="paragraph"><span class="dot">&#8226;</span> <span style="font-weight: bold;">UniPose is the first end-to-end prompt-based keypoint detection framework.</span></p>
+
+        <!-- 第二句话，已加粗 -->
+        <p class="paragraph"><span class="dot">&#8226;</span> <span style="font-weight: bold;">UniPose could support visual or textual prompts for any articulated, rigid, and soft objects.</span></p>
+
+        <!-- 第三句话，已加粗 -->
+        <p class="paragraph"><span class="dot">&#8226;</span> <span style="font-weight: bold;">UniPose has strong fine-grained localization and generalization abilities across image styles, categories, and poses.</span></p>
+      
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="hero teaser">
+  <div class="section-title has-text-centered" >
+    <h2 class="title is-3 is-centered">Visual Prompt as Input</h2>
+  </div>
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img src="unipose/figures/task1.png" style=" width: 2048px;">
+    </div>
+  </div>
+  <div class="section-title has-text-centered" >
+    <h2 class="title is-3 is-centered">Textual Prompt as Input</h2>
+  </div>
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img src="unipose/figures/task2.png" style=" width: 2048px;">
+    </div>
+  </div>
+</section>
+
+
+
+<section class="hero teaser">
+  <div class="section-title has-text-centered" >
+    <h2 class="title is-3 is-centered">Test on arbitrary in-the-wild images</h2>
+  </div>
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img src="unipose/figures/test.png" style=" width: 2048px;">
+    </div>
+  </div>
+  <div class="section-title has-text-centered" >
+    <h2 class="title is-3 is-centered">Test on existing datasets</h2>
+  </div>
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img src="unipose/figures/test2.png" style=" width: 2048px;">
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+<!-- <section class="section">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Video</h2>
+        <div class="content has-text-justified">
+          <div style="text-align: center; vertical-align:middle">
+            <video id="teaser" autoplay muted loop playsinline height="100%">
+              <source src="./demo_video_v5.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+          <div align="center">
+            <b>Samples generated by ModelScope with or without FreeU.</b>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+
+<!--=================Abstract==========================-->
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            This work proposes a unified framework called UniPose to detect keypoints of
+            any articulated (e.g., human and animal), rigid, and soft objects via visual or textual prompts for fine-grained vision understanding and manipulation. Keypoint
+            is a structure-aware, pixel-level, and compact representation of any object, especially articulated objects. Existing fine-grained promptable tasks mainly focus on
+            object instance detection and segmentation but often fail to identify fine-grained
+            granularity and structured information of image and instance, such as eyes, leg,
+            paw, etc. Meanwhile, prompt-based keypoint detection is still under-explored. To
+            bridge the gap, we make the first attempt to develop an end-to-end prompt-based
+            keypoint detection framework called UniPose to detect keypoints of any objects.
+            As keypoint detection tasks are unified in this framework, we can leverage 13
+            keypoint detection datasets with 338 keypoints across 1,237 categories over 400K
+            instances to train a generic keypoint detection model. UniPose can effectively
+            align text-to-keypoint and image-to-keypoint due to the mutual enhancement of
+            textual and visual prompts based on the cross-modality contrastive learning optimization objectives. Our experimental results show that UniPose has strong fine-grained localization and generalization abilities across image styles, categories,
+            and poses. Based on UniPose as a generalist keypoint detector, we hope it could
+            serve fine-grained visual perception, understanding, and generation.
+          </p>
+          </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Paper video. -->
+    <!-- <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Video</h2>
+        <div class="publication-video">
+          <iframe src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0"
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div> -->
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+
+
+
+
+
+
+<!--=================Overview of UniPose==========================-->
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Framework of UniPose </h2>
+        <!-- <h2 class="subtitle has-text-centered">We use eight metrics covering four aspects: structure distance, background preservation, edit prompt-image consistency, and inference time.</h2> -->
+        <div class="content has-text-justified">
+          <div style="text-align: center; vertical-align:middle">
+            <img src="unipose/figures/framework.png" width="1024">
+          </div>
+
+          <!-- 修改后的文本，字体大小增大 -->
+          <p style="font-size: 1.5em;">
+            <span style="font-weight: bold; font-style: italic">Highlight: UniPose can effectively
+           align text-to-keypoint and image-to-keypoint due to the mutual enhancement of
+           textual and visual prompts based on the cross-modality contrastive learning optimization objectives.</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+<!--=================Overview of UniPose==========================-->
+<section class="section" >
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Unifying 13 datasets into the UniKPT dataset for effective training</h2>
+        <!-- <h2 class="subtitle has-text-centered">We use eight metrics covering four aspects: structure distance, background preservation, edit prompt-image consistency, and inference time.</h2> -->
+        <div class="content has-text-justified">
+          <div style="text-align: center; vertical-align:middle">
+            <img src="unipose/figures/dataset.png" width="1024">
+            <img src="unipose/figures/dataset2.png" width="1024">
+          </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<section class="section" >
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Contact Us!</h2>
+        <!-- <h2 class="subtitle has-text-centered">We use eight metrics covering four aspects: structure distance, background preservation, edit prompt-image consistency, and inference time.</h2> -->
+        <div class="content has-text-justified">
+          <p style="font-size: 1.2em; font-weight: bold;">
+            For detailed questions about this work, please contact jieyang5@link.cuhk.edu.cn;
+            We are looking for talented, motivated, and creative research and engineering interns working on human-centric visual understanding and generation topics. If you are interested, please send your CV to Ailing Zeng (zengailing@idea.edu.cn).
+             
+          </p>
+    </div>
+  </div>
+</section>
+
+
+
+
+  
+<section class="section" >
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Cite Us!</h2>
+        <!-- <h2 class="subtitle has-text-centered">We use eight metrics covering four aspects: structure distance, background preservation, edit prompt-image consistency, and inference time.</h2> -->
+        <div class="content has-text-justified">
+          <pre><code>@article{yang2023unipose,
+            title={UniPose: Detection Any Keypoints},
+            author={Yang, Jie and Zeng, Ailing and Zhang, Ruimao and Zhang, Lei},
+            journal={arXiv preprint arXiv:2310.08530},
+            year={2023}
+          }
+      </code></pre>
+      <pre><code>@inproceedings{yang2022explicit,
+        title={Explicit Box Detection Unifies End-to-End Multi-Person Pose Estimation},
+        author={Yang, Jie and Zeng, Ailing and Liu, Shilong and Li, Feng and Zhang, Ruimao and Zhang, Lei},
+        booktitle={The Eleventh International Conference on Learning Representations},
+        year={2022}
+      }
+      </code></pre>
+      <pre><code>@inproceedings{yang2023neural,
+        title={Neural Interactive Keypoint Detection},
+        author={Yang, Jie and Zeng, Ailing and Li, Feng and Liu, Shilong and Zhang, Ruimao and Zhang, Lei},
+        booktitle={Proceedings of the IEEE/CVF International Conference on Computer Vision},
+        pages={15122--15132},
+        year={2023}
+      }
+      </code></pre>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+  
+
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+<!--       <a class="icon-link"
+         href="./static/videos/nerfies_paper.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a> -->
+<!--       <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a> -->
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
