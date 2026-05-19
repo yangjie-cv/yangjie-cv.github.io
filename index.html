@@ -1,208 +1,844 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<link rel="shortcut icon" href="./pic/cuhk.ico">
-	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-	<meta name="keywords" content="Jie Yang">
-	<meta name="description" content="Jie Yang's home page">
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="shortcut icon" href="./pic/cuhk.ico" />
+	<meta name="keywords" content="Jie Yang, 杨杰, Tencent, WeChat Vision, multimodal, vision-language, MLLM, video understanding, keypoint detection, computer vision, CUHK-Shenzhen" />
+	<meta name="description" content="Jie Yang (杨杰) – Senior Researcher at WeChat Vision, Tencent. Research on multimodal foundation models, video LLMs and reinforcement learning." />
 	<meta name="google-site-verification" content="xg04VgCH_1GseFDVDJUDOU2fWPkMU61koxePfxI9L2U" />
-	<link rel="stylesheet" href="jemdoc.css" type="text/css">
-	<title>Jie Yang&#39;s Homepage</title>
+
+	<!-- Open Graph / Twitter -->
+	<meta property="og:title" content="Jie Yang (杨杰) – Homepage" />
+	<meta property="og:description" content="Senior Researcher at WeChat Vision, Tencent. Multimodal foundation models, video LLMs, reinforcement learning." />
+	<meta property="og:image" content="./pic/yangjie.jpg" />
+	<meta property="og:type" content="profile" />
+	<meta name="twitter:card" content="summary" />
+
+	<title>Jie Yang (杨杰) – Homepage</title>
+
+	<!-- Fonts -->
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+
+	<style>
+		/* ---------- Theme ---------- */
+		:root {
+			--bg: #fbfbfd;
+			--surface: #ffffff;
+			--surface-2: #f3f4f8;
+			--text: #1a1d28;
+			--text-soft: #444a59;
+			--muted: #7a8092;
+			--border: #e8eaf0;
+			--border-strong: #d6d9e2;
+			--accent: #2f6feb;
+			--accent-soft: #eaf1ff;
+			--accent-strong: #1f4fbb;
+			--highlight: #e23b52;
+			--venue-bg: #f0eaff;
+			--venue-fg: #5b3cc4;
+			--shadow-sm: 0 1px 2px rgba(20, 25, 40, 0.04);
+			--shadow-md: 0 8px 28px rgba(20, 25, 40, 0.07);
+			--radius: 14px;
+		}
+		@media (prefers-color-scheme: dark) {
+			:root {
+				--bg: #0e1015;
+				--surface: #161922;
+				--surface-2: #1d2130;
+				--text: #e7e9ee;
+				--text-soft: #b8bdcb;
+				--muted: #8a90a2;
+				--border: #262b38;
+				--border-strong: #353b4c;
+				--accent: #6ea8ff;
+				--accent-soft: #1a2540;
+				--accent-strong: #9bbfff;
+				--highlight: #ff6b80;
+				--venue-bg: #2a2247;
+				--venue-fg: #c8b9ff;
+				--shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+				--shadow-md: 0 8px 28px rgba(0, 0, 0, 0.45);
+			}
+		}
+
+		* { box-sizing: border-box; }
+		html { scroll-behavior: smooth; }
+		body {
+			margin: 0;
+			background: var(--bg);
+			color: var(--text);
+			font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+			font-size: 16px;
+			line-height: 1.65;
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;
+		}
+		a {
+			color: var(--accent);
+			text-decoration: none;
+			transition: color 0.15s ease;
+		}
+		a:hover { color: var(--accent-strong); text-decoration: underline; text-underline-offset: 3px; }
+
+		/* ---------- Top nav ---------- */
+		.nav {
+			position: sticky;
+			top: 0;
+			z-index: 50;
+			backdrop-filter: saturate(180%) blur(14px);
+			-webkit-backdrop-filter: saturate(180%) blur(14px);
+			background: color-mix(in srgb, var(--bg) 80%, transparent);
+			border-bottom: 1px solid var(--border);
+		}
+		.nav-inner {
+			max-width: 1000px;
+			margin: 0 auto;
+			padding: 12px 24px;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 16px;
+		}
+		.nav-brand {
+			font-weight: 700;
+			letter-spacing: 0.2px;
+			color: var(--text);
+			display: flex;
+			align-items: center;
+			gap: 8px;
+		}
+		.nav-brand .dot {
+			width: 8px; height: 8px; border-radius: 50%;
+			background: var(--accent);
+			box-shadow: 0 0 0 4px var(--accent-soft);
+		}
+		.nav-links { display: flex; gap: 4px; flex-wrap: wrap; }
+		.nav-links a {
+			color: var(--text-soft);
+			padding: 6px 12px;
+			border-radius: 8px;
+			font-weight: 500;
+			font-size: 0.92rem;
+		}
+		.nav-links a:hover {
+			background: var(--surface-2);
+			color: var(--text);
+			text-decoration: none;
+		}
+
+		/* ---------- Container ---------- */
+		.container {
+			max-width: 1000px;
+			margin: 0 auto;
+			padding: 36px 24px 80px;
+		}
+
+		/* ---------- Hero ---------- */
+		.hero {
+			display: grid;
+			grid-template-columns: 1fr 220px;
+			gap: 40px;
+			align-items: center;
+			background: var(--surface);
+			border: 1px solid var(--border);
+			border-radius: var(--radius);
+			padding: 36px 40px;
+			box-shadow: var(--shadow-md);
+			position: relative;
+			overflow: hidden;
+		}
+		.hero::before {
+			content: "";
+			position: absolute;
+			top: -80px; right: -80px;
+			width: 240px; height: 240px;
+			background: radial-gradient(circle, var(--accent-soft) 0%, transparent 70%);
+			pointer-events: none;
+		}
+		.hero h1 {
+			margin: 0 0 4px;
+			font-size: 2.2rem;
+			font-weight: 800;
+			letter-spacing: -0.02em;
+			line-height: 1.15;
+		}
+		.hero h1 .zh {
+			font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", serif;
+			font-weight: 600;
+			color: var(--text-soft);
+			margin-left: 8px;
+			font-size: 1.6rem;
+		}
+		.hero .role {
+			color: var(--accent);
+			font-weight: 600;
+			margin: 0 0 8px;
+			font-size: 1.05rem;
+		}
+		.hero .meta {
+			margin: 0 0 14px;
+			color: var(--text-soft);
+		}
+		.hero .meta div { margin: 2px 0; }
+		.hero img.avatar {
+			width: 200px; height: 200px;
+			object-fit: cover;
+			border-radius: 18px;
+			box-shadow: var(--shadow-md);
+			border: 1px solid var(--border);
+			position: relative; z-index: 1;
+		}
+		.social {
+			display: flex;
+			gap: 8px;
+			flex-wrap: wrap;
+			margin-top: 10px;
+		}
+		.social a {
+			display: inline-flex;
+			align-items: center;
+			gap: 6px;
+			padding: 7px 14px;
+			border-radius: 999px;
+			background: var(--surface-2);
+			color: var(--text-soft);
+			font-size: 0.88rem;
+			font-weight: 500;
+			border: 1px solid var(--border);
+			transition: all 0.15s ease;
+		}
+		.social a:hover {
+			background: var(--accent-soft);
+			color: var(--accent-strong);
+			text-decoration: none;
+			border-color: color-mix(in srgb, var(--accent) 40%, var(--border));
+			transform: translateY(-1px);
+		}
+		.social img { height: 18px; width: 18px; object-fit: contain; }
+
+		/* ---------- Sections ---------- */
+		section { margin-top: 48px; }
+		h2.section-title {
+			font-size: 0.78rem;
+			font-weight: 700;
+			margin: 0 0 18px;
+			color: var(--accent);
+			letter-spacing: 0.15em;
+			text-transform: uppercase;
+			display: flex;
+			align-items: center;
+			gap: 12px;
+		}
+		h2.section-title::before {
+			content: "";
+			width: 24px;
+			height: 2px;
+			background: var(--accent);
+			border-radius: 2px;
+		}
+		h2.section-title .extra {
+			margin-left: auto;
+			font-size: 0.78rem;
+			font-weight: 500;
+			text-transform: none;
+			letter-spacing: normal;
+			color: var(--muted);
+		}
+		h2.section-title .extra a { color: var(--accent); }
+
+		.section-heading {
+			font-size: 1.65rem;
+			font-weight: 800;
+			margin: 0 0 18px;
+			letter-spacing: -0.02em;
+			color: var(--text);
+		}
+
+		/* ---------- Bio ---------- */
+		.bio { color: var(--text-soft); }
+		.bio p { margin: 0 0 12px; }
+		.interests {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 8px;
+			margin: 16px 0 4px;
+		}
+		.chip {
+			display: inline-flex;
+			align-items: center;
+			padding: 5px 12px;
+			border-radius: 999px;
+			background: var(--surface-2);
+			color: var(--text-soft);
+			font-size: 0.82rem;
+			font-weight: 500;
+			border: 1px solid var(--border);
+		}
+		.chip .em { color: var(--accent); margin-right: 5px; }
+		.recruit {
+			margin-top: 18px;
+			padding: 14px 18px;
+			background: color-mix(in srgb, var(--highlight) 9%, transparent);
+			border-left: 3px solid var(--highlight);
+			border-radius: 8px;
+			color: var(--text);
+		}
+		.recruit strong { color: var(--highlight); }
+
+		/* ---------- News ---------- */
+		.news {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+			border-left: 2px solid var(--border);
+		}
+		.news li {
+			position: relative;
+			padding: 7px 0 7px 22px;
+			color: var(--text-soft);
+		}
+		.news li::before {
+			content: "";
+			position: absolute;
+			left: -7px; top: 16px;
+			width: 12px; height: 12px;
+			background: var(--accent);
+			border-radius: 50%;
+			border: 3px solid var(--bg);
+			box-shadow: 0 0 0 1px var(--accent);
+		}
+		.news li.recent::before {
+			background: var(--highlight);
+			box-shadow: 0 0 0 1px var(--highlight);
+		}
+		.news li b { color: var(--text); }
+
+		/* ---------- Publications ---------- */
+		.pubs-note {
+			color: var(--muted);
+			font-size: 0.88rem;
+			margin: -6px 0 14px;
+		}
+		.pubs { display: flex; flex-direction: column; gap: 10px; }
+		.pub {
+			background: var(--surface);
+			border: 1px solid var(--border);
+			border-radius: 12px;
+			padding: 16px 20px 16px 22px;
+			box-shadow: var(--shadow-sm);
+			position: relative;
+			transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+			border-left: 3px solid var(--border-strong);
+		}
+		.pub:hover {
+			transform: translateY(-1px);
+			box-shadow: var(--shadow-md);
+			border-color: color-mix(in srgb, var(--accent) 30%, var(--border));
+			border-left-color: var(--accent);
+		}
+		.pub .title {
+			font-weight: 600;
+			color: var(--text);
+			font-size: 1.02rem;
+			line-height: 1.45;
+			margin: 0 0 6px;
+		}
+		.pub .title a { color: var(--text); }
+		.pub .title a:hover { color: var(--accent); text-decoration: none; }
+		.pub .authors {
+			color: var(--text-soft);
+			font-size: 0.94rem;
+			margin: 0 0 8px;
+			line-height: 1.5;
+		}
+		.pub .authors b { color: var(--text); font-weight: 700; }
+		.pub .meta-row {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			gap: 8px;
+			font-size: 0.86rem;
+		}
+		.venue {
+			display: inline-block;
+			padding: 3px 10px;
+			background: var(--venue-bg);
+			color: var(--venue-fg);
+			border-radius: 999px;
+			font-weight: 700;
+			font-size: 0.74rem;
+			letter-spacing: 0.04em;
+			text-transform: uppercase;
+		}
+		.venue.preprint {
+			background: var(--surface-2);
+			color: var(--muted);
+		}
+		.year {
+			color: var(--muted);
+			font-weight: 500;
+			font-family: "JetBrains Mono", monospace;
+			font-size: 0.82rem;
+		}
+		.pub-link {
+			margin-left: auto;
+			padding: 4px 12px;
+			border-radius: 999px;
+			background: var(--accent-soft);
+			color: var(--accent-strong);
+			font-weight: 500;
+			font-size: 0.8rem;
+		}
+		.pub-link:hover {
+			background: var(--accent);
+			color: #fff;
+			text-decoration: none;
+		}
+
+		/* ---------- Services ---------- */
+		.services {
+			display: grid;
+			grid-template-columns: 1fr;
+			gap: 14px;
+		}
+		.service-card {
+			background: var(--surface);
+			border: 1px solid var(--border);
+			border-radius: 12px;
+			padding: 18px 22px;
+			box-shadow: var(--shadow-sm);
+		}
+		.service-card .role {
+			font-size: 0.74rem;
+			text-transform: uppercase;
+			letter-spacing: 0.1em;
+			color: var(--accent);
+			font-weight: 700;
+			margin: 0 0 8px;
+		}
+		.service-card .body {
+			color: var(--text-soft);
+			line-height: 1.55;
+		}
+		.service-card .body b { color: var(--text); }
+		.venue-list {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 6px;
+			margin-top: 8px;
+		}
+		.venue-tag {
+			padding: 3px 10px;
+			border-radius: 6px;
+			background: var(--surface-2);
+			border: 1px solid var(--border);
+			color: var(--text);
+			font-size: 0.78rem;
+			font-weight: 600;
+			font-family: "JetBrains Mono", monospace;
+			letter-spacing: 0.02em;
+		}
+
+		/* ---------- Awards ---------- */
+		.awards {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+			gap: 12px;
+			list-style: none;
+			padding: 0;
+			margin: 0;
+		}
+		.awards li {
+			background: var(--surface);
+			border: 1px solid var(--border);
+			border-radius: 12px;
+			padding: 14px 18px;
+			color: var(--text-soft);
+			box-shadow: var(--shadow-sm);
+			display: flex;
+			align-items: center;
+			gap: 10px;
+		}
+		.awards li .ic {
+			width: 32px; height: 32px;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			background: color-mix(in srgb, #f5b400 18%, transparent);
+			color: #c08800;
+			border-radius: 8px;
+			font-size: 1rem;
+			flex-shrink: 0;
+		}
+		@media (prefers-color-scheme: dark) {
+			.awards li .ic { color: #ffd96b; }
+		}
+
+		/* ---------- Footer ---------- */
+		footer {
+			margin-top: 60px;
+			padding-top: 24px;
+			border-top: 1px solid var(--border);
+			text-align: center;
+			color: var(--muted);
+			font-size: 0.85rem;
+		}
+		footer #clustrmaps-widget {
+			width: 220px;
+			margin: 8px auto 12px;
+		}
+
+		/* ---------- Responsive ---------- */
+		@media (max-width: 760px) {
+			.hero {
+				grid-template-columns: 1fr;
+				text-align: center;
+				padding: 26px 22px;
+				gap: 22px;
+			}
+			.hero img.avatar {
+				width: 150px; height: 150px;
+				margin: 0 auto;
+				order: -1;
+			}
+			.hero .social { justify-content: center; }
+			.hero h1 { font-size: 1.7rem; }
+			.hero h1 .zh { font-size: 1.3rem; }
+			.interests { justify-content: center; }
+			.nav-links { gap: 0; }
+			.nav-links a { padding: 6px 8px; font-size: 0.85rem; }
+			.container { padding: 24px 16px 60px; }
+			.pub-link { margin-left: 0; }
+			.section-heading { font-size: 1.4rem; }
+		}
+	</style>
 </head>
 <body>
-	<!-- <nav class="navbar navbar-dark navbar-expand-lg fixed-top">
-		<div id="layout-menu">
-			<a href="#publication">Publication</a>
-			<a href="#experience">Experience</a>
-			<a href="#service">Service</a>
-			<a href="#presentation">Presentation</a>
-			<a href="#award">Award</a>
-			<a href="#patent">Patent</a>
-			<a href="#teaching">Teaching</a>
-		</div>
-	</nav> -->
-<div id="layout-content" style="margin-top:25px">
-	
-<table>
-	<tbody>
-		<tr>
-			<td width="670">
-				<div id="toptitle">
-					<h1></h1>
-					<h1>Jie Yang &nbsp;&nbsp;<font face="Arial">杨杰</font></h1>
-				</div>
-				<h3>Senior Researcher</h3>
-				<p>
-					WeChat Vision, Tencent<br>
-					📍 Beijing<br>
-					<br>
-					Email: <a href="mailto:cvjieyang@tencent.com">cvjieyang@tencent.com</a><br>
-				</p>
-				<p>
-					<a href="https://scholar.google.com/citations?user=UVzG9IcAAAAJ&hl=zh-CN"><img src="./pic/google_scholar.png" height="30px" style="margin-bottom:-3px"></a>
-					<a href="https://github.com/yangjie-cv"><img src="./pic/github_s.jpg" height="30px" style="margin-bottom:-3px"></a>
-				</p>
-			</td>
-			<td>
-				<img src="./pic/yangjie.jpg" border="0" width="200" style="margin-right: 50px;"><br>
-			</td>
-		</tr><tr>
-	</tr></tbody>
-</table>
-<h2>Biography</h2>
-<p>
-	I am currently a Senior Researcher at WeChat Vision, Tencent, working on multimodal foundation models. Before that, I got my Ph.D. degree from The Chinese University of Hong Kong, Shenzhen, under the co-supervision of <a href="http://www.zhangruimao.site/">Prof. Ruimao Zhang</a> and <a href="https://mypage.cuhk.edu.cn/academics/lizhen/">Prof. Zhen Li</a>. During my Ph.D. studies (2021-2025), I had a wonderful time interning at <a href="https://www.idea.edu.cn/">IDEA</a>, <a href="https://eng.bigai.ai/">BIGAI</a>, <a href="https://www.sensetime.com/cn">SenseTime Research</a>, and <a href="https://www.tencent.com/">Tencent</a>.
-</p> 
-<p style="color: red;"> We are actively seeking self-motivated interns to work on related research topics, including image/video/omni pretraining/post-training and reinforcement learning. If you're interested, feel free to reach out!  </p>
-<h2>News</h2>
-<ul>
-						<li>
-		One paper is accepted to NeurIPS2025.
-	</li>
-									<li>
-		We present <a href="https://www.arxiv.org/pdf/2506.07905"> WeThink</a> for general-purpose vision-language reasoning.
-	</li>
-								<li>
-		One paper is accepted to T-PAMI.
-	</li>
-							<li>
-		One paper is accepted to CVPR2025.
-	</li>
-						<li>
-		One paper is accepted to ICRA2025.
-	</li>
-					<li>
-		One paper is accepted to NeurIPS2024.
-	</li>
-							<li>
-		<a href="https://arxiv.org/abs/2303.05499"> Grounding DINO</a> is selected as <a href="https://www.paperdigest.org/2024/09/most-influential-eccv-papers-2024-09/"> The Most Influential Paper</a> in ECCV 2024.
 
-						
-	</li>
-				<li>
-		Three papers are accepted to ECCV2024.
-	</li>
-			<li>
-		One paper is accepted to CVPR2024.
-	</li>
-			<li>
-		We present <a href="https://arxiv.org/pdf/2310.08530.pdf"> X-Pose</a> to detect any keypoints of any objects.
-	</li>
-	<li>
-	<a href="https://github.com/IDEA-Research/Grounded-Segment-Anything"> Grounded SAM</a> is accepted to ICCV 2023 Demo Track.
-		</li>
-	<li>
-		One paper is accepted to ICCV2023.
-	</li>
-	<li>
-		Two papers are accepted to MIDL2023 and one is rated as an oral presentation.
-	</li>
-	<li>
-		One paper is accepted to CVPR2023.
-	</li>
-	<li>
-		One paper is accepted to ICLR2023.
-	</li>
-	<li>
-		One paper is accepted to NeurIPS2022.
-	</li>
-</ul>
-		<h2> Selected Publications [<a href="https://scholar.google.com/citations?user=UVzG9IcAAAAJ&hl=zh-CN">Google Scholar</a>]</h2>
-
-				<li><a href="https://www.arxiv.org/pdf/2506.07905">WeThink: Toward General-purpose Vision-Language Reasoning via Reinforcement Learning
-</a><br>
-<b>Jie Yang</b>, Feipeng Ma, Zitian Wang, Dacheng Yin, Kang Rong, Fengyun Rao, Ruimao Zhang.<br>
-arXiv preprint, 2025. 
-	</li>
-					<li><a href="https://arxiv.org/pdf/2506.09049">VIKI-R: Coordinating Embodied Multi-Agent Cooperation via Reinforcement Learning
-</a><br>
-Li Kang, Xiufeng Song, Heng Zhou, Yiran Qin, <b>Jie Yang</b>, Xiaohong Liu, Philip Torr, Lei Bai, Zhenfei Yin.<br>
-Conference on Neural Information Processing Systems Datasets and Benchmarks Track (<b>NeurIPS D&B</b>), 2025.
-	</li>
-	
-			<li><a href="https://ieeexplore.ieee.org/document/10945344">ED-Pose++: Enhanced Explicit Box Detection for Conventional and Interactive Multi-Object Keypoint Detection
-</a><br>
-<b>Jie Yang</b>, Ailing Zeng, Tianhe Ren, Shilong Liu, Feng Li, Ruimao Zhang, Lei Zhang.<br>
-IEEE Transactions on Pattern Analysis and Machine Intelligence (<b>T-PAMI</b>), 2025.
-	</li>
-	
-		<li><a href="https://arxiv.org/pdf/2505.24315">InteractAnything: Zero-shot Human Object Interaction Synthesis via LLM Feedback and Object Affordance Parsing
-</a><br>
-Jinlu Zhang, Yixin Chen, Zan Wang, <b>Jie Yang</b>, Yizhou Wang, Siyuan Huang.<br>
-IEEE Conference on Computer Vision and Pattern Recognition (<b>CVPR</b>), 2025.
-	</li>
-	
-		<li><a href="https://arxiv.org/pdf/2503.10586">Unlock the Power of Unlabeled Data in Language Driving Model
-</a><br>
-Chaoqun Wang, <b>Jie Yang</b>, Xiaobin Hong, Ruimao Zhang.<br>
-IEEE International Conference on Robotics and Automation (<b>ICRA</b>), 2025
-	</li>
-	
-		<li><a href="https://arxiv.org/pdf/2411.01846">KptLLM: Unveiling the Power of Large Language Model for Keypoint Comprehension
-</a><br>
-<b>Jie Yang</b>, Wang Zeng, Sheng Jin, Lumin Xu, Wentao Liu, Chen Qian, Ruimao Zhang.<br>
- Conference on Neural Information Processing Systems (<b>NeurIPS</b>), 2024
-	</li>
-	
-		<li><a href="https://arxiv.org/pdf/2310.08530.pdf">X-Pose: Detecting Any Keypoints
-</a><br>
-<b>Jie Yang</b>, Ailing Zeng, Ruimao Zhang, Lei Zhang.<br>
- European Conference on Computer Vision (<b>ECCV</b>), 2024
-	</li>
-			<li><a href="https://arxiv.org/pdf/2407.12435">F-HOI: Toward Fine-grained Semantic-Aligned 3D Human-Object Interactions
-</a><br>
-<b>Jie Yang</b>, Xuesong Niu, Nan Jiang, Ruimao Zhang, Siyuan Huang.<br>
- European Conference on Computer Vision (<b>ECCV</b>), 2024
-	</li>
-				<li><a href="https://arxiv.org/pdf/2406.07221">Open-World Human-Object Interaction Detection via Multi-modal Prompts
-</a><br>
-<b>Jie Yang</b>, Bingliang Li, Ailing Zeng, Lei Zhang, Ruimao Zhang.<br>
-IEEE Conference on Computer Vision and Pattern Recognition (<b>CVPR</b>), 2024.
-  <br />
-</li>
-	
-	<li><a href="https://openaccess.thecvf.com/content/ICCV2023/papers/Yang_Neural_Interactive_Keypoint_Detection_ICCV_2023_paper.pdf">Neural Interactive Keypoint Detection
-</a><br>
-<b>Jie Yang</b>, Ailing Zeng, Feng Li, Shilong Liu, Ruimao Zhang, Lei Zhang.<br>
-IEEE International Conference on Computer Vision (<b>ICCV</b>), 2023.
-	</li>
-<li> <a href="https://openaccess.thecvf.com/content/CVPR2023/papers/Yang_Semantic_Human_Parsing_via_Scalable_Semantic_Transfer_Over_Multiple_Label_CVPR_2023_paper.pdf">Semantic Human Parsing via Scalable Semantic Transfer over Multiple Label Domains
-</a><br>
-<b>Jie Yang</b>, Chaoqun Wang, Zhen Li, Junle Wang, Ruimao Zhang.<br>
-IEEE Conference on Computer Vision and Pattern Recognition (<b>CVPR</b>), 2023.
-</li>	
-				<li><a href="https://arxiv.org/pdf/2302.01593.pdf">Explicit Box Detection Unifies End-to-End Multi-Person Pose Estimation
-</a><br>
-<b>Jie Yang</b>, Ailing Zeng, Shilong Liu, Feng Li, Ruimao Zhang, Lei Zhang.<br>
-International Conference on Learning Representations (<b>ICLR</b>), 2023.
-</li>	
-				
-<li><a href="https://arxiv.org/pdf/2206.10571.pdf">Toward Unpaired Multi-modal Medical Image Segmentation via Learning Structured Semantic Consistency
-</a><br>
-<b>Jie Yang</b>, Ye Zhu, Chaoqun Wang, Zhen Li, Ruimao Zhang.<br>
-International Conference on Medical Imaging with Deep Learning (<b>MIDL</b>), 2023.
-</li>
-</ul>				
-	<h2>Honors &amp; Awards</h2>
-		<ul>
-    <li><p> The First Prize Scholarship, 2018，2019，2020. </p></li>
-    <li><p> National Scholarship, 2018 </p></li>
-		</ul>
-		<div id="footer">
-			<div id="footer-text"></div>
+<nav class="nav">
+	<div class="nav-inner">
+		<div class="nav-brand"><span class="dot"></span> Jie Yang · 杨杰</div>
+		<div class="nav-links">
+			<a href="#bio">Bio</a>
+			<a href="#news">News</a>
+			<a href="#publications">Publications</a>
+			<a href="#services">Services</a>
+			<a href="#awards">Awards</a>
 		</div>
-		<p>
-			<center>
-				<div id="clustrmaps-widget" style="width:40%">
-					<script type='text/javascript' id='clustrmaps'
-						src='//cdn.clustrmaps.com/map_v2.js?cl=ffffff&w=400&t=tt&d=yqzHjRzsBJQtkz3lH1jgeuQAOnTiZWl3UFnWM5FeXZM&cmo=ff0000&cmn=ffb800&ct=ffffff'></script>
-				</div>
-				<br>&copy; Jie Yang | Last updated: Sep 2023
-			</center>
-		</p>
 	</div>
-</body>
-</html>
+</nav>
+
+<main class="container">
+
+	<!-- ===== Hero ===== -->
+	<header class="hero">
+		<div>
+			<h1>Jie Yang <span class="zh">杨杰</span></h1>
+			<p class="role">Senior Researcher · Multimodal Foundation Models</p>
+			<div class="meta">
+				<div>WeChat Vision, Tencent</div>
+				<div>📍 Beijing, China</div>
+				<div>✉️ <a href="mailto:cvjieyang@tencent.com">cvjieyang@tencent.com</a></div>
+			</div>
+			<div class="social">
+				<a href="https://scholar.google.com/citations?user=UVzG9IcAAAAJ&hl=zh-CN" target="_blank" rel="noopener">
+					<img src="./pic/google_scholar.png" alt="Google Scholar" /> Google Scholar
+				</a>
+				<a href="https://github.com/yangjie-cv" target="_blank" rel="noopener">
+					<img src="./pic/github_s.jpg" alt="GitHub" /> GitHub
+				</a>
+				<a href="mailto:cvjieyang@tencent.com">✉️ Email</a>
+			</div>
+		</div>
+		<img class="avatar" src="./pic/yangjie.jpg" alt="Jie Yang" />
+	</header>
+
+	<!-- ===== Biography ===== -->
+	<section id="bio">
+		<h2 class="section-title">About</h2>
+		<h3 class="section-heading">Biography</h3>
+		<div class="bio">
+			<p>
+				I am a <b>Senior Researcher at WeChat Vision, Tencent</b>, working on multimodal foundation models.
+				My research interest covers the full training stack — from large-scale pretraining to post-training
+				optimization for models that perceive, reason, and act
+				across image, video, audio, and language.
+			</p>
+			<p>
+				I received my Ph.D. from <b>The Chinese University of Hong Kong</b>, Shenzhen, advised by
+				<a href="http://www.zhangruimao.site/" target="_blank" rel="noopener">Prof. Ruimao Zhang</a>
+				and <a href="https://mypage.cuhk.edu.cn/academics/lizhen/" target="_blank" rel="noopener">Prof. Zhen Li</a>.
+				During my Ph.D. (2021–2025), I was fortunate to spend research stays at
+				<a href="https://www.idea.edu.cn/" target="_blank" rel="noopener">IDEA</a>,
+				<a href="https://eng.bigai.ai/" target="_blank" rel="noopener">BIGAI</a>,
+				<a href="https://www.sensetime.com/cn" target="_blank" rel="noopener">SenseTime Research</a>, and
+				<a href="https://www.tencent.com/" target="_blank" rel="noopener">Tencent</a>, where I worked on
+				multi-modal learning for diverse vision tasks.
+			</p>
+
+			<div class="interests">
+				<span class="chip"><span class="em">▸</span>Omni-modal Foundation Models</span>
+				<span class="chip"><span class="em">▸</span>MLLM Pretraining &amp; Post-Training</span>
+				<span class="chip"><span class="em">▸</span>Video/Audio Understanding</span>
+			</div>
+
+			<div class="recruit">
+				<strong>📣 Hiring interns!</strong>
+				We are actively seeking self-motivated interns to work on related research topics, including
+				image / video / omni pretraining &amp; post-training.
+				If you're interested, feel free to reach out via <a href="mailto:cvjieyang@tencent.com">email</a>!
+			</div>
+		</div>
+	</section>
+
+	<!-- ===== News ===== -->
+	<section id="news">
+		<h2 class="section-title">Updates</h2>
+		<h3 class="section-heading">News</h3>
+		<ul class="news">
+			<li>One paper is accepted to <b>NeurIPS 2025</b>.</li>
+			<li>We present <a href="https://www.arxiv.org/pdf/2506.07905" target="_blank" rel="noopener">WeThink</a> for general-purpose vision-language reasoning.</li>
+			<li>One paper is accepted to <b>T-PAMI</b>.</li>
+			<li>One paper is accepted to <b>CVPR 2025</b>.</li>
+			<li>One paper is accepted to <b>ICRA 2025</b>.</li>
+			<li>One paper is accepted to <b>NeurIPS 2024</b>.</li>
+			<li><a href="https://arxiv.org/abs/2303.05499" target="_blank" rel="noopener">Grounding DINO</a> is selected as <a href="https://www.paperdigest.org/2024/09/most-influential-eccv-papers-2024-09/" target="_blank" rel="noopener">The Most Influential Paper</a> in ECCV 2024.</li>
+			<li>Three papers are accepted to <b>ECCV 2024</b>.</li>
+			<li>One paper is accepted to <b>CVPR 2024</b>.</li>
+			<li>We present <a href="https://arxiv.org/pdf/2310.08530.pdf" target="_blank" rel="noopener">X-Pose</a> to detect any keypoints of any objects.</li>
+			<li><a href="https://github.com/IDEA-Research/Grounded-Segment-Anything" target="_blank" rel="noopener">Grounded SAM</a> is accepted to <b>ICCV 2023 Demo Track</b>.</li>
+			<li>One paper is accepted to <b>ICCV 2023</b>.</li>
+			<li>Two papers are accepted to <b>MIDL 2023</b>, one rated as oral presentation.</li>
+			<li>One paper is accepted to <b>CVPR 2023</b>.</li>
+			<li>One paper is accepted to <b>ICLR 2023</b>.</li>
+			<li>One paper is accepted to <b>NeurIPS 2022</b>.</li>
+		</ul>
+	</section>
+
+	<!-- ===== Publications ===== -->
+	<section id="publications">
+		<h2 class="section-title">
+			Research
+			<span class="extra">[<a href="https://scholar.google.com/citations?user=UVzG9IcAAAAJ&hl=zh-CN" target="_blank" rel="noopener">Full list on Google Scholar</a>]</span>
+		</h2>
+		<h3 class="section-heading">Selected Publications</h3>
+		<p class="pubs-note"><sup>#</sup> corresponding author</p>
+
+		<div class="pubs">
+
+			<article class="pub">
+				<div class="title"><a href="https://arxiv.org/pdf/2605.18577v1" target="_blank" rel="noopener">Stage-adaptive Token Selection for Efficient Omni-modal LLMs</a></div>
+				<div class="authors">Zijie Xin, <b>Jie Yang</b><sup>#</sup>, Ruixiang Zhao, Tianyi Wang, Fengyun Rao, Jing LYU, Xirong Li<sup>#</sup>.</div>
+				<div class="meta-row">
+					<span class="venue preprint">arXiv preprint</span>
+					<span class="year">2026</span>
+					<a class="pub-link" href="https://arxiv.org/pdf/2605.18577v1" target="_blank" rel="noopener">PDF →</a>
+				</div>
+			</article>
+
+			<article class="pub">
+				<div class="title"><a href="https://arxiv.org/pdf/2605.18577v1" target="_blank" rel="noopener">OmniPro: A Comprehensive Benchmark for Omni-Proactive Streaming Video Understanding</a></div>
+				<div class="authors">Ruixiang Zhao, <b>Jie Yang</b><sup>#</sup>, Zijie Xin, Tianyi Wang, Fengyun Rao, Jing LYU, Xirong Li<sup>#</sup>.</div>
+				<div class="meta-row">
+					<span class="venue preprint">arXiv preprint</span>
+					<span class="year">2026</span>
+					<a class="pub-link" href="https://arxiv.org/pdf/2605.18577v1" target="_blank" rel="noopener">PDF →</a>
+				</div>
+			</article>
+
+			<article class="pub">
+				<div class="title"><a href="https://www.arxiv.org/pdf/2506.07905" target="_blank" rel="noopener">WeThink: Toward General-purpose Vision-Language Reasoning via Reinforcement Learning</a></div>
+				<div class="authors"><b>Jie Yang</b>, Feipeng Ma, Zitian Wang, Dacheng Yin, Kang Rong, Fengyun Rao, Ruimao Zhang.</div>
+				<div class="meta-row">
+					<span class="venue preprint">arXiv preprint</span>
+					<span class="year">2025</span>
+					<a class="pub-link" href="https://www.arxiv.org/pdf/2506.07905" target="_blank" rel="noopener">PDF →</a>
+				</div>
+			</article>
+
+			<article class="pub">
+				<div class="title"><a href="https://arxiv.org/pdf/2506.09049" target="_blank" rel="noopener">VIKI-R: Coordinating Embodied Multi-Agent Cooperation via Reinforcement Learning</a></div>
+				<div class="authors">Li Kang, Xiufeng Song, Heng Zhou, Yiran Qin, <b>Jie Yang</b>, Xiaohong Liu, Philip Torr, Lei Bai, Zhenfei Yin.</div>
+				<div class="meta-row">
+					<span class="venue">NeurIPS D&amp;B</span>
+					<span class="year">2025</span>
+					<a class="pub-link" href="https://arxiv.org/pdf/2506.09049" target="_blank" rel="noopener">PDF →</a>
+				</div>
+			</article>
+
+			<article class="pub">
+				<div class="title"><a href="https://ieeexplore.ieee.org/document/10945344" target="_blank" rel="noopener">ED-Pose++: Enhanced Explicit Box Detection for Conventional and Interactive Multi-Object Keypoint Detection</a></div>
+				<div class="authors"><b>Jie Yang</b>, Ailing Zeng, Tianhe Ren, Shilong Liu, Feng Li, Ruimao Zhang, Lei Zhang.</div>
+				<div class="meta-row">
+					<span class="venue">T-PAMI</span>
+					<span class="year">2025</span>
+					<a class="pub-link" href="https://ieeexplore.ieee.org/document/10945344" target="_blank" rel="noopener">IEEE →</a>
+				</div>
+			</article>
+
+			<article class="pub">
+				<div class="title"><a href="https://arxiv.org/pdf/2505.24315" target="_blank" rel="noopener">InteractAnything: Zero-shot Human Object Interaction Synthesis via LLM Feedback and Object Affordance Parsing</a></div>
+				<div class="authors">Jinlu Zhang, Yixin Chen, Zan Wang, <b>Jie Yang</b>, Yizhou Wang, Siyuan Huang.</div>
+				<div class="meta-row">
+					<span class="venue">CVPR</span>
+					<span class="year">2025</span>
+					<a class="pub-link" href="https://arxiv.org/pdf/2505.24315" target="_blank" rel="noopener">PDF →</a>
+				</div>
+			</article>
+
+			<article class="pub">
+				<div class="title"><a href="https://arxiv.org/pdf/2503.10586" target="_blank" rel="noopener">Unlock the Power of Unlabeled Data in Language Driving Model</a></div>
+				<div class="authors">Chaoqun Wang, <b>Jie Yang</b>, Xiaobin Hong, Ruimao Zhang.</div>
+				<div class="meta-row">
+					<span class="venue">ICRA</span>
+					<span class="year">2025</span>
+					<a class="pub-link" href="https://arxiv.org/pdf/2503.10586" target="_blank" rel="noopener">PDF →</a>
+				</div>
+			</article>
+
+			<article class="pub">
+				<div class="title"><a href="https://arxiv.org/pdf/2411.01846" target="_blank" rel="noopener">KptLLM: Unveiling the Power of Large Language Model for Keypoint Comprehension</a></div>
+				<div class="authors"><b>Jie Yang</b>, Wang Zeng, Sheng Jin, Lumin Xu, Wentao Liu, Chen Qian, Ruimao Zhang.</div>
+				<div class="meta-row">
+					<span class="venue">NeurIPS</span>
+					<span class="year">2024</span>
+					<a class="pub-link" href="https://arxiv.org/pdf/2411.01846" target="_blank" rel="noopener">PDF →</a>
+				</div>
+			</article>
+
+			<article class="pub">
+				<div class="title"><a href="https://arxiv.org/pdf/2310.08530.pdf" target="_blank" rel="noopener">X-Pose: Detecting Any Keypoints</a></div>
+				<div class="authors"><b>Jie Yang</b>, Ailing Zeng, Ruimao Zhang, Lei Zhang.</div>
+				<div class="meta-row">
+					<span class="venue">ECCV</span>
+					<span class="year">2024</span>
+					<a class="pub-link" href="https://arxiv.org/pdf/2310.08530.pdf" target="_blank" rel="noopener">PDF →</a>
+				</div>
+			</article>
+
+			<article class="pub">
+				<div class="title"><a href="https://arxiv.org/pdf/2407.12435" target="_blank" rel="noopener">F-HOI: Toward Fine-grained Semantic-Aligned 3D Human-Object Interactions</a></div>
+				<div class="authors"><b>Jie Yang</b>, Xuesong Niu, Nan Jiang, Ruimao Zhang, Siyuan Huang.</div>
+				<div class="meta-row">
+					<span class="venue">ECCV</span>
+					<span class="year">2024</span>
+					<a class="pub-link" href="https://arxiv.org/pdf/2407.12435" target="_blank" rel="noopener">PDF →</a>
+				</div>
+			</article>
+
+			<article class="pub">
+				<div class="title"><a href="https://arxiv.org/pdf/2406.07221" target="_blank" rel="noopener">Open-World Human-Object Interaction Detection via Multi-modal Prompts</a></div>
+				<div class="authors"><b>Jie Yang</b>, Bingliang Li, Ailing Zeng, Lei Zhang, Ruimao Zhang.</div>
+				<div class="meta-row">
+					<span class="venue">CVPR</span>
+					<span class="year">2024</span>
+					<a class="pub-link" href="https://arxiv.org/pdf/2406.07221" target="_blank" rel="noopener">PDF →</a>
+				</div>
+			</article>
+
+			<article class="pub">
+				<div class="title"><a href="https://openaccess.thecvf.com/content/ICCV2023/papers/Yang_Neural_Interactive_Keypoint_Detection_ICCV_2023_paper.pdf" target="_blank" rel="noopener">Neural Interactive Keypoint Detection</a></div>
+				<div class="authors"><b>Jie Yang</b>, Ailing Zeng, Feng Li, Shilong Liu, Ruimao Zhang, Lei Zhang.</div>
+				<div class="meta-row">
+					<span class="venue">ICCV</span>
+					<span class="year">2023</span>
+					<a class="pub-link" href="https://openaccess.thecvf.com/content/ICCV2023/papers/Yang_Neural_Interactive_Keypoint_Detection_ICCV_2023_paper.pdf" target="_blank" rel="noopener">PDF →</a>
+				</div>
+			</article>
+
+			<article class="pub">
+				<div class="title"><a href="https://openaccess.thecvf.com/content/CVPR2023/papers/Yang_Semantic_Human_Parsing_via_Scalable_Semantic_Transfer_Over_Multiple_Label_CVPR_2023_paper.pdf" target="_blank" rel="noopener">Semantic Human Parsing via Scalable Semantic Transfer over Multiple Label Domains</a></div>
+				<div class="authors"><b>Jie Yang</b>, Chaoqun Wang, Zhen Li, Junle Wang, Ruimao Zhang.</div>
+				<div class="meta-row">
+					<span class="venue">CVPR</span>
+					<span class="year">2023</span>
+					<a class="pub-link" href="https://openaccess.thecvf.com/content/CVPR2023/papers/Yang_Semantic_Human_Parsing_via_Scalable_Semantic_Transfer_Over_Multiple_Label_CVPR_2023_paper.pdf" target="_blank" rel="noopener">PDF →</a>
+				</div>
+			</article>
+
+			<article class="pub">
+				<div class="title"><a href="https://arxiv.org/pdf/2302.01593.pdf" target="_blank" rel="noopener">Explicit Box Detection Unifies End-to-End Multi-Person Pose Estimation</a></div>
+				<div class="authors"><b>Jie Yang</b>, Ailing Zeng, Shilong Liu, Feng Li, Ruimao Zhang, Lei Zhang.</div>
+				<div class="meta-row">
+					<span class="venue">ICLR</span>
+					<span class="year">2023</span>
+					<a class="pub-link" href="https://arxiv.org/pdf/2302.01593.pdf" target="_blank" rel="noopener">PDF →</a>
+				</div>
+			</article>
+
+			<article class="pub">
+				<div class="title"><a href="https://arxiv.org/pdf/2206.10571.pdf" target="_blank" rel="noopener">Toward Unpaired Multi-modal Medical Image Segmentation via Learning Structured Semantic Consistency</a></div>
+				<div class="authors"><b>Jie Yang</b>, Ye Zhu, Chaoqun Wang, Zhen Li, Ruimao Zhang.</div>
+				<div class="meta-row">
+					<span class="venue">MIDL</span>
+					<span class="year">2023</span>
+					<a class="pub-link" href="https://arxiv.org/pdf/2206.10571.pdf" target="_blank" rel="noopener">PDF →</a>
+				</div>
+			</article>
+
+		</div>
+	</section>
+
+	<!-- ===== Academic Services ===== -->
+	<section id="services">
+		<h2 class="section-title">Community</h2>
+		<h3 class="section-heading">Academic Services</h3>
+
+		<div class="services">
+
+			<div class="service-card">
+				<p class="role">Conference &amp; Journal Reviewer</p>
+				<div class="body">
+					Serving as a reviewer for top-tier venues in computer vision and machine learning:
+					<div class="venue-list">
+						<span class="venue-tag">CVPR</span>
+						<span class="venue-tag">ICLR</span>
+						<span class="venue-tag">ICML</span>
+						<span class="venue-tag">NeurIPS</span>
+						<span class="venue-tag">ECCV</span>
+						<span class="venue-tag">ICCV</span>
+						<span class="venue-tag">T-PAMI</span>
+						<span class="venue-tag">TNNLS</span>
+						<span class="venue-tag">TMM</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="service-card">
+				<p class="role">Challenge Organizer</p>
+				<div class="body">
+					Co-organizer of the
+					<a href="https://amos22.grand-challenge.org/" target="_blank" rel="noopener"><b>MICCAI AMOS Segmentation Challenge 2022</b></a>,
+					a large-scale benchmark on multi-organ abdominal segmentation across CT and MRI modalities.
+				</div>
+			</div>
+
+		</div>
+	</section>
+
+	<!-- ===== Awards ===== -->
+	<section id="awards">
+		<h2 class="section-title">Recognition</h2>
+		<h3 class="section-heading">Honors &amp; Awards</h3>
+		<ul class="awards">
+			<li><span class="ic">🏆</span><span>The First Prize Scholarship · 2018, 2019, 2020</span></li>
+			<li><span class="ic">🏆</span><span>National Scholarship · 2018</span></li>
+		</ul>
+	</section>
+
+	<!-- ===== Footer ===== -->
+	<footer>
+		<div id="clustrmaps-widget">
+			<script type='text/javascript' id='clustrmaps'
+				src='//cdn.clustrmaps.com/map_v2.js?cl=ffffff&w=400&t=tt&d=yqzHjRzsBJQtkz3lH1jgeuQAOnTiZWl3UFnWM5FeXZM&cmo=ff0000&cmn=ffb800&ct=ffffff'></script>
+		</div>
+		<div>&copy; Jie Yang · Last updated: May 2026</div>
+	</footer>
+
+</main>
+
 </body>
 </html>
