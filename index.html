@@ -25,23 +25,23 @@
 	<style>
 		/* ---------- Theme ---------- */
 		:root {
-			--bg: #fbfbfd;
+			--bg: #ffffff;
 			--surface: #ffffff;
-			--surface-2: #f3f4f8;
+			--surface-2: #f6f8fb;
 			--text: #1a1d28;
 			--text-soft: #444a59;
-			--muted: #7a8092;
+			--muted: #626b7c;
 			--border: #e8eaf0;
 			--border-strong: #d6d9e2;
-			--accent: #2f6feb;
+			--accent: #285eb3;
 			--accent-soft: #eaf1ff;
 			--accent-strong: #1f4fbb;
-			--highlight: #e23b52;
-			--venue-bg: #f0eaff;
-			--venue-fg: #5b3cc4;
+			--highlight: #285eb3;
+			--venue-bg: #f0f4fa;
+			--venue-fg: #405a7c;
 			--shadow-sm: 0 1px 2px rgba(20, 25, 40, 0.04);
-			--shadow-md: 0 8px 28px rgba(20, 25, 40, 0.07);
-			--radius: 14px;
+			--shadow-md: 0 2px 12px rgba(20, 25, 40, 0.025);
+			--radius: 8px;
 		}
 		@media (prefers-color-scheme: dark) {
 			:root {
@@ -56,16 +56,16 @@
 				--accent: #6ea8ff;
 				--accent-soft: #1a2540;
 				--accent-strong: #9bbfff;
-				--highlight: #ff6b80;
-				--venue-bg: #2a2247;
-				--venue-fg: #c8b9ff;
+				--highlight: #6ea8ff;
+				--venue-bg: #1d293c;
+				--venue-fg: #b1c6e2;
 				--shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
-				--shadow-md: 0 8px 28px rgba(0, 0, 0, 0.45);
+				--shadow-md: 0 2px 12px rgba(0, 0, 0, 0.12);
 			}
 		}
 
 		* { box-sizing: border-box; }
-		html { scroll-behavior: smooth; }
+		html { scroll-behavior: smooth; scroll-padding-top: 100px; }
 		body {
 			margin: 0;
 			background: var(--bg);
@@ -110,11 +110,6 @@
 			align-items: center;
 			gap: 8px;
 		}
-		.nav-brand .dot {
-			width: 8px; height: 8px; border-radius: 50%;
-			background: var(--accent);
-			box-shadow: 0 0 0 4px var(--accent-soft);
-		}
 		.nav-links { display: flex; gap: 4px; flex-wrap: wrap; }
 		.nav-links a {
 			color: var(--text-soft);
@@ -139,7 +134,7 @@
 		/* ---------- Hero ---------- */
 		.hero {
 			display: grid;
-			grid-template-columns: 1fr 220px;
+			grid-template-columns: minmax(0, 1fr) 220px;
 			gap: 40px;
 			align-items: center;
 			background: var(--surface);
@@ -151,18 +146,13 @@
 			overflow: hidden;
 		}
 		.hero::before {
-			content: "";
-			position: absolute;
-			top: -80px; right: -80px;
-			width: 240px; height: 240px;
-			background: radial-gradient(circle, var(--accent-soft) 0%, transparent 70%);
-			pointer-events: none;
+			display: none;
 		}
 		.hero h1 {
-			margin: 0 0 4px;
+			margin: 0 0 8px;
 			font-size: 2.2rem;
-			font-weight: 800;
-			letter-spacing: -0.02em;
+			font-weight: 700;
+			letter-spacing: -0.025em;
 			line-height: 1.15;
 		}
 		.hero h1 .zh {
@@ -173,9 +163,9 @@
 			font-size: 1.6rem;
 		}
 		.hero .role {
-			color: var(--accent);
-			font-weight: 600;
-			margin: 0 0 8px;
+			color: var(--text-soft);
+			font-weight: 500;
+			margin: 0 0 10px;
 			font-size: 1.05rem;
 		}
 		.hero .meta {
@@ -186,8 +176,7 @@
 		.hero img.avatar {
 			width: 200px; height: 200px;
 			object-fit: cover;
-			border-radius: 18px;
-			box-shadow: var(--shadow-md);
+			border-radius: 8px;
 			border: 1px solid var(--border);
 			position: relative; z-index: 1;
 		}
@@ -200,31 +189,28 @@
 		.social a {
 			display: inline-flex;
 			align-items: center;
-			gap: 6px;
-			padding: 7px 14px;
-			border-radius: 999px;
-			background: var(--surface-2);
-			color: var(--text-soft);
-			font-size: 0.88rem;
+			padding: 6px 12px;
+			border-radius: 5px;
+			background: var(--surface);
+			color: var(--accent);
+			font-size: 0.875rem;
 			font-weight: 500;
 			border: 1px solid var(--border);
-			transition: all 0.15s ease;
+			transition: background 0.15s ease;
 		}
 		.social a:hover {
 			background: var(--accent-soft);
 			color: var(--accent-strong);
 			text-decoration: none;
-			border-color: color-mix(in srgb, var(--accent) 40%, var(--border));
-			transform: translateY(-1px);
+			border-color: var(--accent);
 		}
-		.social img { height: 18px; width: 18px; object-fit: contain; }
 
 		/* ---------- Sections ---------- */
 		section { margin-top: 48px; }
 
 		.section-heading {
-			font-size: 1.65rem;
-			font-weight: 800;
+			font-size: 1.45rem;
+			font-weight: 650;
 			margin: 0 0 18px;
 			letter-spacing: -0.02em;
 			color: var(--text);
@@ -247,28 +233,24 @@
 		.interests {
 			display: flex;
 			flex-wrap: wrap;
-			gap: 8px;
+			gap: 6px 18px;
 			margin: 16px 0 4px;
 		}
 		.chip {
 			display: inline-flex;
 			align-items: center;
-			padding: 5px 12px;
-			border-radius: 999px;
-			background: var(--surface-2);
-			color: var(--text-soft);
-			font-size: 0.82rem;
-			font-weight: 500;
-			border: 1px solid var(--border);
+			padding: 0;
+			color: var(--muted);
+			font-size: 0.875rem;
+			font-weight: 400;
 		}
-		.chip .em { color: var(--accent); margin-right: 5px; }
 		.recruit {
 			margin-top: 18px;
-			padding: 14px 18px;
-			background: color-mix(in srgb, var(--highlight) 9%, transparent);
-			border-left: 3px solid var(--highlight);
-			border-radius: 8px;
-			color: var(--text);
+			padding: 12px 16px;
+			background: var(--surface-2);
+			border-left: 2px solid var(--accent);
+			border-radius: 0 4px 4px 0;
+			color: var(--text-soft);
 		}
 		.recruit strong { color: var(--highlight); }
 
@@ -287,16 +269,12 @@
 		.news li::before {
 			content: "";
 			position: absolute;
-			left: -7px; top: 16px;
-			width: 12px; height: 12px;
-			background: var(--accent);
-			border-radius: 50%;
-			border: 3px solid var(--bg);
-			box-shadow: 0 0 0 1px var(--accent);
+			left: -1px; top: 20px;
+			width: 8px; height: 1px;
+			background: var(--border-strong);
 		}
 		.news li.recent::before {
-			background: var(--highlight);
-			box-shadow: 0 0 0 1px var(--highlight);
+			background: var(--accent);
 		}
 		.news li b { color: var(--text); }
 
@@ -306,37 +284,33 @@
 			font-size: 0.88rem;
 			margin: -6px 0 14px;
 		}
-		.pubs { display: flex; flex-direction: column; gap: 10px; }
+		.pubs {
+			display: flex;
+			flex-direction: column;
+			gap: 0;
+		}
 		.pub {
-			background: var(--surface);
-			border: 1px solid var(--border);
-			border-radius: 12px;
-			padding: 16px 20px 16px 22px;
-			box-shadow: var(--shadow-sm);
+			padding: 20px 0;
+			border-bottom: 1px solid var(--border);
 			position: relative;
-			transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
-			border-left: 3px solid var(--border-strong);
 		}
 		.pub:hover {
-			transform: translateY(-1px);
-			box-shadow: var(--shadow-md);
-			border-color: color-mix(in srgb, var(--accent) 30%, var(--border));
-			border-left-color: var(--accent);
+			background: var(--surface-2);
 		}
 		.pub .title {
 			font-weight: 600;
 			color: var(--text);
-			font-size: 1.02rem;
-			line-height: 1.45;
-			margin: 0 0 6px;
+			font-size: 1.0625rem;
+			line-height: 1.5;
+			margin: 0 0 7px;
 		}
 		.pub .title a { color: var(--text); }
 		.pub .title a:hover { color: var(--accent); text-decoration: none; }
 		.pub .authors {
 			color: var(--text-soft);
-			font-size: 0.94rem;
-			margin: 0 0 8px;
-			line-height: 1.5;
+			font-size: 0.9375rem;
+			margin: 0 0 10px;
+			line-height: 1.6;
 		}
 		.pub .authors b { color: var(--text); font-weight: 700; }
 		.pub .meta-row {
@@ -348,47 +322,41 @@
 		}
 		.venue {
 			display: inline-block;
-			padding: 3px 10px;
+			padding: 2px 8px;
 			background: var(--venue-bg);
 			color: var(--venue-fg);
-			border-radius: 999px;
-			font-weight: 700;
-			font-size: 0.74rem;
-			letter-spacing: 0.04em;
-			text-transform: uppercase;
+			border-radius: 4px;
+			font-weight: 500;
+			font-size: 0.875rem;
 		}
 		.venue.preprint {
 			background: var(--surface-2);
 			color: var(--muted);
 		}
 		.venue.techreport {
-			background: #fdebcb;
-			color: #8a5a00;
-		}
-		@media (prefers-color-scheme: dark) {
-			.venue.techreport {
-				background: #3a2a10;
-				color: #f5b94a;
-			}
+			background: var(--venue-bg);
+			color: var(--venue-fg);
 		}
 		.year {
 			color: var(--muted);
-			font-weight: 500;
-			font-family: "JetBrains Mono", monospace;
-			font-size: 0.82rem;
+			font-weight: 400;
+			font-family: "Inter", sans-serif;
+			font-size: 0.875rem;
 		}
 		.pub-link {
 			margin-left: auto;
-			padding: 4px 12px;
-			border-radius: 999px;
-			background: var(--accent-soft);
-			color: var(--accent-strong);
+			padding: 3px 10px;
+			border: 1px solid var(--border);
+			border-radius: 4px;
+			background: var(--surface);
+			color: var(--accent);
 			font-weight: 500;
-			font-size: 0.8rem;
+			font-size: 0.875rem;
 		}
 		.pub-link:hover {
-			background: var(--accent);
-			color: #fff;
+			background: var(--accent-soft);
+			color: var(--accent-strong);
+			border-color: var(--accent);
 			text-decoration: none;
 		}
 
@@ -399,18 +367,13 @@
 			gap: 14px;
 		}
 		.service-card {
-			background: var(--surface);
-			border: 1px solid var(--border);
-			border-radius: 12px;
-			padding: 18px 22px;
-			box-shadow: var(--shadow-sm);
+			border-top: 1px solid var(--border);
+			padding: 18px 0;
 		}
 		.service-card .role {
-			font-size: 0.74rem;
-			text-transform: uppercase;
-			letter-spacing: 0.1em;
-			color: var(--accent);
-			font-weight: 700;
+			font-size: 0.9375rem;
+			color: var(--text);
+			font-weight: 600;
 			margin: 0 0 8px;
 		}
 		.service-card .body {
@@ -421,19 +384,14 @@
 		.venue-list {
 			display: flex;
 			flex-wrap: wrap;
-			gap: 6px;
+			gap: 6px 18px;
 			margin-top: 8px;
 		}
 		.venue-tag {
-			padding: 3px 10px;
-			border-radius: 6px;
-			background: var(--surface-2);
-			border: 1px solid var(--border);
-			color: var(--text);
-			font-size: 0.78rem;
-			font-weight: 600;
-			font-family: "JetBrains Mono", monospace;
-			letter-spacing: 0.02em;
+			padding: 0;
+			color: var(--text-soft);
+			font-size: 0.875rem;
+			font-weight: 400;
 		}
 
 		/* ---------- Awards ---------- */
@@ -446,29 +404,9 @@
 			margin: 0;
 		}
 		.awards li {
-			background: var(--surface);
-			border: 1px solid var(--border);
-			border-radius: 12px;
-			padding: 14px 18px;
+			border-top: 1px solid var(--border);
+			padding: 14px 0;
 			color: var(--text-soft);
-			box-shadow: var(--shadow-sm);
-			display: flex;
-			align-items: center;
-			gap: 10px;
-		}
-		.awards li .ic {
-			width: 32px; height: 32px;
-			display: inline-flex;
-			align-items: center;
-			justify-content: center;
-			background: color-mix(in srgb, #f5b400 18%, transparent);
-			color: #c08800;
-			border-radius: 8px;
-			font-size: 1rem;
-			flex-shrink: 0;
-		}
-		@media (prefers-color-scheme: dark) {
-			.awards li .ic { color: #ffd96b; }
 		}
 
 		/* ---------- Footer ---------- */
@@ -508,13 +446,41 @@
 			.pub-link { margin-left: 0; }
 			.section-heading { font-size: 1.4rem; }
 		}
+
+		/* Focus, latest publication, and compact mobile navigation. */
+		.bio a, .news a, .service-card .body a { text-decoration: underline; text-underline-offset: 3px; }
+		.skip-link { position: fixed; top: -100px; left: 16px; z-index: 100; padding: 8px 16px; background: var(--surface); }
+		.skip-link:focus { top: 12px; }
+		:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
+		.pub.pub-latest {
+			padding: 18px 20px;
+			border: 1px solid var(--border);
+			border-left: 2px solid var(--accent);
+			border-radius: 4px;
+			background: var(--surface-2);
+			margin-bottom: 4px;
+		}
+		.pub.pub-latest .title a { color: var(--accent-strong); }
+		.news time { color: var(--muted); font-size: 0.875rem; }
+		@media (max-width: 540px) {
+			.nav-inner { flex-direction: column; gap: 6px; padding: 10px 16px; }
+			.nav-links { justify-content: center; }
+			.nav-links a { padding: 6px; }
+			.hero .meta { overflow-wrap: anywhere; }
+			.awards { grid-template-columns: 1fr; }
+		}
+		@media (prefers-reduced-motion: reduce) {
+			html { scroll-behavior: auto; }
+			*, *::before, *::after { transition: none !important; }
+		}
 	</style>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 
-<nav class="nav">
+<nav class="nav" aria-label="Main navigation">
 	<div class="nav-inner">
-		<div class="nav-brand"><span class="dot"></span> Jie Yang · 杨杰</div>
+		<div class="nav-brand">Jie Yang · 杨杰</div>
 		<div class="nav-links">
 			<a href="#bio">Bio</a>
 			<a href="#news">News</a>
@@ -525,26 +491,26 @@
 	</div>
 </nav>
 
-<main class="container">
+<main class="container" id="main">
 
 	<!-- ===== Hero ===== -->
 	<header class="hero">
 		<div>
-			<h1>Jie Yang <span class="zh">杨杰</span></h1>
+			<h1>Jie Yang <span class="zh" lang="zh">杨杰</span></h1>
 			<p class="role">Senior Researcher · Multimodal Foundation Models</p>
 			<div class="meta">
 				<div>WeChat Vision, Tencent</div>
-				<div>📍 Beijing, China</div>
-				<div>✉️ <a href="mailto:cvjieyang@tencent.com">cvjieyang@tencent.com</a></div>
+				<div>Beijing, China</div>
+				<div><a href="mailto:cvjieyang@tencent.com">cvjieyang@tencent.com</a></div>
 			</div>
 			<div class="social">
 				<a href="https://scholar.google.com/citations?user=UVzG9IcAAAAJ&hl=zh-CN" target="_blank" rel="noopener">
-					<img src="./pic/google_scholar.png" alt="Google Scholar" /> Google Scholar
+					Google Scholar
 				</a>
 				<a href="https://github.com/yangjie-cv" target="_blank" rel="noopener">
-					<img src="./pic/github_s.jpg" alt="GitHub" /> GitHub
+					GitHub
 				</a>
-				<a href="mailto:cvjieyang@tencent.com">✉️ Email</a>
+				<a href="mailto:cvjieyang@tencent.com">Email</a>
 			</div>
 		</div>
 		<img class="avatar" src="./pic/yangjie.jpg" alt="Jie Yang" />
@@ -552,7 +518,7 @@
 
 	<!-- ===== Biography ===== -->
 	<section id="bio">
-		<h3 class="section-heading">Biography</h3>
+		<h2 class="section-heading">Biography</h2>
 		<div class="bio">
 			<p>
 				I am a <b>Senior Researcher at WeChat Vision, Tencent</b>, working on multimodal foundation models.
@@ -582,13 +548,13 @@
 			</p>
 
 			<div class="interests">
-				<span class="chip"><span class="em">▸</span>Omni-modal Foundation Models</span>
-				<span class="chip"><span class="em">▸</span>MLLM Pretraining &amp; Post-Training</span>
-				<span class="chip"><span class="em">▸</span>Video/Audio Understanding</span>
+				<span class="chip">Omni-modal Foundation Models</span>
+				<span class="chip">MLLM Pretraining &amp; Post-Training</span>
+				<span class="chip">Video/Audio Understanding</span>
 			</div>
 
 			<div class="recruit">
-				<strong>📣 Hiring interns!</strong>
+				<strong>Hiring interns!</strong>
 				We are actively seeking self-motivated interns to work on related research topics, including
 				image / video / omni pretraining &amp; post-training.
 				If you're interested, feel free to reach out via <a href="mailto:cvjieyang@tencent.com">email</a>!
@@ -598,8 +564,9 @@
 
 	<!-- ===== News ===== -->
 	<section id="news">
-		<h3 class="section-heading">News</h3>
+		<h2 class="section-heading">News</h2>
 		<ul class="news">
+			<li class="recent"><time datetime="2026-11">[Nov 2026]</time> We released <a href="https://arxiv.org/pdf/2611.26409" target="_blank" rel="noopener"><b>WeMM-Video</b></a>, an open-source model family for omni-modal video understanding and reasoning.</li>
 			<li>One paper is accepted to <b>ECCV 2026</b>.</li>
 			<li>One paper is accepted to <b>NeurIPS 2025</b>.</li>
 			<li>We present <a href="https://www.arxiv.org/pdf/2506.07905" target="_blank" rel="noopener">WeThink</a> for general-purpose vision-language reasoning.</li>
@@ -622,158 +589,178 @@
 
 	<!-- ===== Publications ===== -->
 	<section id="publications">
-		<h3 class="section-heading">Selected Publications <span class="extra">[<a href="https://scholar.google.com/citations?user=UVzG9IcAAAAJ&hl=zh-CN" target="_blank" rel="noopener">Full list on Google Scholar</a>]</span></h3>
-		<p class="pubs-note"><sup>#</sup> corresponding author</p>
+		<h2 class="section-heading">Selected Publications <span class="extra">[<a href="https://scholar.google.com/citations?user=UVzG9IcAAAAJ&hl=zh-CN" target="_blank" rel="noopener">Full list on Google Scholar</a>]</span></h2>
+		<p class="pubs-note" id="publication-notes"><sup>*</sup> core contributors &nbsp;·&nbsp; <sup>#</sup> corresponding author</p>
 
 		<div class="pubs">
 
+			<article class="pub pub-latest" id="wemm-video" aria-labelledby="wemm-title">
+				<h3 class="title" id="wemm-title"><a href="https://arxiv.org/pdf/2611.26409" target="_blank" rel="noopener">WeMM-Video: Pushing the Frontiers of Open-Source Omni-Modal Video Understanding</a></h3>
+				<div class="authors" aria-describedby="publication-notes">Changli Tang<sup>*</sup>, <b>Jie Yang</b><sup>*</sup>, Tianyi Wang<sup>*</sup>, Lei Li<sup>*</sup>, Daoze Zhang<sup>*</sup>, Zijie Xin<sup>*</sup>, Zhan Liu, Li Li, Jinchang Xu, Fengyun Rao, Chao Zhang, Jing Lyu.</div>
+				<div class="meta-row">
+					<span class="venue techreport">Technical report</span>
+					<span class="year">2026</span>
+					<a class="pub-link" href="https://arxiv.org/pdf/2611.26409" target="_blank" rel="noopener">PDF</a>
+				</div>
+			</article>
+
+			<article class="pub" id="spoken-intentions">
+				<h3 class="title"><a href="https://arxiv.org/pdf/2611.24706" target="_blank" rel="noopener">Can Omni-modal LLMs Understand Spoken Intentions?</a></h3>
+				<div class="authors">Zijie Xin, Tianyi Wang, Daoze Zhang, <b>Jie Yang</b>, Changli Tang, Qijie Wei, Fengyun Rao, Xirong Li.</div>
+				<div class="meta-row">
+					<span class="venue preprint">arXiv preprint</span>
+					<span class="year">2026</span>
+					<a class="pub-link" href="https://arxiv.org/pdf/2611.24706" target="_blank" rel="noopener">PDF</a>
+				</div>
+			</article>
+
 			<article class="pub">
-				<div class="title"><a href="https://arxiv.org/pdf/2605.20035v1" target="_blank" rel="noopener">Stage-adaptive Token Selection for Efficient Omni-modal LLMs</a></div>
+				<h3 class="title"><a href="https://arxiv.org/pdf/2605.20035v1" target="_blank" rel="noopener">Stage-adaptive Token Selection for Efficient Omni-modal LLMs</a></h3>
 				<div class="authors">Zijie Xin, <b>Jie Yang</b><sup>#</sup>, Ruixiang Zhao, Tianyi Wang, Fengyun Rao, Jing LYU, Xirong Li<sup>#</sup>.</div>
 				<div class="meta-row">
 					<span class="venue preprint">arXiv preprint</span>
 					<span class="year">2026</span>
-					<a class="pub-link" href="https://arxiv.org/pdf/2605.20035v1" target="_blank" rel="noopener">PDF →</a>
+					<a class="pub-link" href="https://arxiv.org/pdf/2605.20035v1" target="_blank" rel="noopener">PDF</a>
 				</div>
 			</article>
 
 			<article class="pub">
-				<div class="title"><a href="https://arxiv.org/pdf/2605.18577v1" target="_blank" rel="noopener">OmniPro: A Comprehensive Benchmark for Omni-Proactive Streaming Video Understanding</a></div>
+				<h3 class="title"><a href="https://arxiv.org/pdf/2605.18577v1" target="_blank" rel="noopener">OmniPro: A Comprehensive Benchmark for Omni-Proactive Streaming Video Understanding</a></h3>
 				<div class="authors">Ruixiang Zhao, <b>Jie Yang</b><sup>#</sup>, Zijie Xin, Tianyi Wang, Fengyun Rao, Jing LYU, Xirong Li<sup>#</sup>.</div>
 				<div class="meta-row">
 					<span class="venue preprint">arXiv preprint</span>
 					<span class="year">2026</span>
-					<a class="pub-link" href="https://arxiv.org/pdf/2605.18577v1" target="_blank" rel="noopener">PDF →</a>
+					<a class="pub-link" href="https://arxiv.org/pdf/2605.18577v1" target="_blank" rel="noopener">PDF</a>
 				</div>
 			</article>
 
 			<article class="pub">
-				<div class="title"><a href="https://www.arxiv.org/pdf/2506.07905" target="_blank" rel="noopener">WeThink: Toward General-purpose Vision-Language Reasoning via Reinforcement Learning</a></div>
+				<h3 class="title"><a href="https://www.arxiv.org/pdf/2506.07905" target="_blank" rel="noopener">WeThink: Toward General-purpose Vision-Language Reasoning via Reinforcement Learning</a></h3>
 				<div class="authors"><b>Jie Yang</b>, Feipeng Ma, Zitian Wang, Dacheng Yin, Kang Rong, Fengyun Rao, Ruimao Zhang.</div>
 				<div class="meta-row">
 					<span class="venue techreport">Tech Report</span>
 					<span class="year">2025</span>
-					<a class="pub-link" href="https://www.arxiv.org/pdf/2506.07905" target="_blank" rel="noopener">PDF →</a>
+					<a class="pub-link" href="https://www.arxiv.org/pdf/2506.07905" target="_blank" rel="noopener">PDF</a>
 				</div>
 			</article>
 
 			<article class="pub">
-				<div class="title"><a href="https://arxiv.org/pdf/2506.09049" target="_blank" rel="noopener">VIKI-R: Coordinating Embodied Multi-Agent Cooperation via Reinforcement Learning</a></div>
+				<h3 class="title"><a href="https://arxiv.org/pdf/2506.09049" target="_blank" rel="noopener">VIKI-R: Coordinating Embodied Multi-Agent Cooperation via Reinforcement Learning</a></h3>
 				<div class="authors">Li Kang, Xiufeng Song, Heng Zhou, Yiran Qin, <b>Jie Yang</b>, Xiaohong Liu, Philip Torr, Lei Bai, Zhenfei Yin.</div>
 				<div class="meta-row">
 					<span class="venue">NeurIPS D&amp;B</span>
 					<span class="year">2025</span>
-					<a class="pub-link" href="https://arxiv.org/pdf/2506.09049" target="_blank" rel="noopener">PDF →</a>
+					<a class="pub-link" href="https://arxiv.org/pdf/2506.09049" target="_blank" rel="noopener">PDF</a>
 				</div>
 			</article>
 
 			<article class="pub">
-				<div class="title"><a href="https://ieeexplore.ieee.org/document/10945344" target="_blank" rel="noopener">ED-Pose++: Enhanced Explicit Box Detection for Conventional and Interactive Multi-Object Keypoint Detection</a></div>
+				<h3 class="title"><a href="https://ieeexplore.ieee.org/document/10945344" target="_blank" rel="noopener">ED-Pose++: Enhanced Explicit Box Detection for Conventional and Interactive Multi-Object Keypoint Detection</a></h3>
 				<div class="authors"><b>Jie Yang</b>, Ailing Zeng, Tianhe Ren, Shilong Liu, Feng Li, Ruimao Zhang, Lei Zhang.</div>
 				<div class="meta-row">
 					<span class="venue">T-PAMI</span>
 					<span class="year">2025</span>
-					<a class="pub-link" href="https://ieeexplore.ieee.org/document/10945344" target="_blank" rel="noopener">IEEE →</a>
+					<a class="pub-link" href="https://ieeexplore.ieee.org/document/10945344" target="_blank" rel="noopener">IEEE</a>
 				</div>
 			</article>
 
 			<article class="pub">
-				<div class="title"><a href="https://arxiv.org/pdf/2505.24315" target="_blank" rel="noopener">InteractAnything: Zero-shot Human Object Interaction Synthesis via LLM Feedback and Object Affordance Parsing</a></div>
+				<h3 class="title"><a href="https://arxiv.org/pdf/2505.24315" target="_blank" rel="noopener">InteractAnything: Zero-shot Human Object Interaction Synthesis via LLM Feedback and Object Affordance Parsing</a></h3>
 				<div class="authors">Jinlu Zhang, Yixin Chen, Zan Wang, <b>Jie Yang</b>, Yizhou Wang, Siyuan Huang.</div>
 				<div class="meta-row">
 					<span class="venue">CVPR</span>
 					<span class="year">2025</span>
-					<a class="pub-link" href="https://arxiv.org/pdf/2505.24315" target="_blank" rel="noopener">PDF →</a>
+					<a class="pub-link" href="https://arxiv.org/pdf/2505.24315" target="_blank" rel="noopener">PDF</a>
 				</div>
 			</article>
 
 			<article class="pub">
-				<div class="title"><a href="https://arxiv.org/pdf/2503.10586" target="_blank" rel="noopener">Unlock the Power of Unlabeled Data in Language Driving Model</a></div>
+				<h3 class="title"><a href="https://arxiv.org/pdf/2503.10586" target="_blank" rel="noopener">Unlock the Power of Unlabeled Data in Language Driving Model</a></h3>
 				<div class="authors">Chaoqun Wang, <b>Jie Yang</b>, Xiaobin Hong, Ruimao Zhang.</div>
 				<div class="meta-row">
 					<span class="venue">ICRA</span>
 					<span class="year">2025</span>
-					<a class="pub-link" href="https://arxiv.org/pdf/2503.10586" target="_blank" rel="noopener">PDF →</a>
+					<a class="pub-link" href="https://arxiv.org/pdf/2503.10586" target="_blank" rel="noopener">PDF</a>
 				</div>
 			</article>
 
 			<article class="pub">
-				<div class="title"><a href="https://arxiv.org/pdf/2411.01846" target="_blank" rel="noopener">KptLLM: Unveiling the Power of Large Language Model for Keypoint Comprehension</a></div>
+				<h3 class="title"><a href="https://arxiv.org/pdf/2411.01846" target="_blank" rel="noopener">KptLLM: Unveiling the Power of Large Language Model for Keypoint Comprehension</a></h3>
 				<div class="authors"><b>Jie Yang</b>, Wang Zeng, Sheng Jin, Lumin Xu, Wentao Liu, Chen Qian, Ruimao Zhang.</div>
 				<div class="meta-row">
 					<span class="venue">NeurIPS</span>
 					<span class="year">2024</span>
-					<a class="pub-link" href="https://arxiv.org/pdf/2411.01846" target="_blank" rel="noopener">PDF →</a>
+					<a class="pub-link" href="https://arxiv.org/pdf/2411.01846" target="_blank" rel="noopener">PDF</a>
 				</div>
 			</article>
 
 			<article class="pub">
-				<div class="title"><a href="https://arxiv.org/pdf/2310.08530.pdf" target="_blank" rel="noopener">X-Pose: Detecting Any Keypoints</a></div>
+				<h3 class="title"><a href="https://arxiv.org/pdf/2310.08530.pdf" target="_blank" rel="noopener">X-Pose: Detecting Any Keypoints</a></h3>
 				<div class="authors"><b>Jie Yang</b>, Ailing Zeng, Ruimao Zhang, Lei Zhang.</div>
 				<div class="meta-row">
 					<span class="venue">ECCV</span>
 					<span class="year">2024</span>
-					<a class="pub-link" href="https://arxiv.org/pdf/2310.08530.pdf" target="_blank" rel="noopener">PDF →</a>
+					<a class="pub-link" href="https://arxiv.org/pdf/2310.08530.pdf" target="_blank" rel="noopener">PDF</a>
 				</div>
 			</article>
 
 			<article class="pub">
-				<div class="title"><a href="https://arxiv.org/pdf/2407.12435" target="_blank" rel="noopener">F-HOI: Toward Fine-grained Semantic-Aligned 3D Human-Object Interactions</a></div>
+				<h3 class="title"><a href="https://arxiv.org/pdf/2407.12435" target="_blank" rel="noopener">F-HOI: Toward Fine-grained Semantic-Aligned 3D Human-Object Interactions</a></h3>
 				<div class="authors"><b>Jie Yang</b>, Xuesong Niu, Nan Jiang, Ruimao Zhang, Siyuan Huang.</div>
 				<div class="meta-row">
 					<span class="venue">ECCV</span>
 					<span class="year">2024</span>
-					<a class="pub-link" href="https://arxiv.org/pdf/2407.12435" target="_blank" rel="noopener">PDF →</a>
+					<a class="pub-link" href="https://arxiv.org/pdf/2407.12435" target="_blank" rel="noopener">PDF</a>
 				</div>
 			</article>
 
 			<article class="pub">
-				<div class="title"><a href="https://arxiv.org/pdf/2406.07221" target="_blank" rel="noopener">Open-World Human-Object Interaction Detection via Multi-modal Prompts</a></div>
+				<h3 class="title"><a href="https://arxiv.org/pdf/2406.07221" target="_blank" rel="noopener">Open-World Human-Object Interaction Detection via Multi-modal Prompts</a></h3>
 				<div class="authors"><b>Jie Yang</b>, Bingliang Li, Ailing Zeng, Lei Zhang, Ruimao Zhang.</div>
 				<div class="meta-row">
 					<span class="venue">CVPR</span>
 					<span class="year">2024</span>
-					<a class="pub-link" href="https://arxiv.org/pdf/2406.07221" target="_blank" rel="noopener">PDF →</a>
+					<a class="pub-link" href="https://arxiv.org/pdf/2406.07221" target="_blank" rel="noopener">PDF</a>
 				</div>
 			</article>
 
 			<article class="pub">
-				<div class="title"><a href="https://openaccess.thecvf.com/content/ICCV2023/papers/Yang_Neural_Interactive_Keypoint_Detection_ICCV_2023_paper.pdf" target="_blank" rel="noopener">Neural Interactive Keypoint Detection</a></div>
+				<h3 class="title"><a href="https://openaccess.thecvf.com/content/ICCV2023/papers/Yang_Neural_Interactive_Keypoint_Detection_ICCV_2023_paper.pdf" target="_blank" rel="noopener">Neural Interactive Keypoint Detection</a></h3>
 				<div class="authors"><b>Jie Yang</b>, Ailing Zeng, Feng Li, Shilong Liu, Ruimao Zhang, Lei Zhang.</div>
 				<div class="meta-row">
 					<span class="venue">ICCV</span>
 					<span class="year">2023</span>
-					<a class="pub-link" href="https://openaccess.thecvf.com/content/ICCV2023/papers/Yang_Neural_Interactive_Keypoint_Detection_ICCV_2023_paper.pdf" target="_blank" rel="noopener">PDF →</a>
+					<a class="pub-link" href="https://openaccess.thecvf.com/content/ICCV2023/papers/Yang_Neural_Interactive_Keypoint_Detection_ICCV_2023_paper.pdf" target="_blank" rel="noopener">PDF</a>
 				</div>
 			</article>
 
 			<article class="pub">
-				<div class="title"><a href="https://openaccess.thecvf.com/content/CVPR2023/papers/Yang_Semantic_Human_Parsing_via_Scalable_Semantic_Transfer_Over_Multiple_Label_CVPR_2023_paper.pdf" target="_blank" rel="noopener">Semantic Human Parsing via Scalable Semantic Transfer over Multiple Label Domains</a></div>
+				<h3 class="title"><a href="https://openaccess.thecvf.com/content/CVPR2023/papers/Yang_Semantic_Human_Parsing_via_Scalable_Semantic_Transfer_Over_Multiple_Label_CVPR_2023_paper.pdf" target="_blank" rel="noopener">Semantic Human Parsing via Scalable Semantic Transfer over Multiple Label Domains</a></h3>
 				<div class="authors"><b>Jie Yang</b>, Chaoqun Wang, Zhen Li, Junle Wang, Ruimao Zhang.</div>
 				<div class="meta-row">
 					<span class="venue">CVPR</span>
 					<span class="year">2023</span>
-					<a class="pub-link" href="https://openaccess.thecvf.com/content/CVPR2023/papers/Yang_Semantic_Human_Parsing_via_Scalable_Semantic_Transfer_Over_Multiple_Label_CVPR_2023_paper.pdf" target="_blank" rel="noopener">PDF →</a>
+					<a class="pub-link" href="https://openaccess.thecvf.com/content/CVPR2023/papers/Yang_Semantic_Human_Parsing_via_Scalable_Semantic_Transfer_Over_Multiple_Label_CVPR_2023_paper.pdf" target="_blank" rel="noopener">PDF</a>
 				</div>
 			</article>
 
 			<article class="pub">
-				<div class="title"><a href="https://arxiv.org/pdf/2302.01593.pdf" target="_blank" rel="noopener">Explicit Box Detection Unifies End-to-End Multi-Person Pose Estimation</a></div>
+				<h3 class="title"><a href="https://arxiv.org/pdf/2302.01593.pdf" target="_blank" rel="noopener">Explicit Box Detection Unifies End-to-End Multi-Person Pose Estimation</a></h3>
 				<div class="authors"><b>Jie Yang</b>, Ailing Zeng, Shilong Liu, Feng Li, Ruimao Zhang, Lei Zhang.</div>
 				<div class="meta-row">
 					<span class="venue">ICLR</span>
 					<span class="year">2023</span>
-					<a class="pub-link" href="https://arxiv.org/pdf/2302.01593.pdf" target="_blank" rel="noopener">PDF →</a>
+					<a class="pub-link" href="https://arxiv.org/pdf/2302.01593.pdf" target="_blank" rel="noopener">PDF</a>
 				</div>
 			</article>
 
 			<article class="pub">
-				<div class="title"><a href="https://arxiv.org/pdf/2206.10571.pdf" target="_blank" rel="noopener">Toward Unpaired Multi-modal Medical Image Segmentation via Learning Structured Semantic Consistency</a></div>
+				<h3 class="title"><a href="https://arxiv.org/pdf/2206.10571.pdf" target="_blank" rel="noopener">Toward Unpaired Multi-modal Medical Image Segmentation via Learning Structured Semantic Consistency</a></h3>
 				<div class="authors"><b>Jie Yang</b>, Ye Zhu, Chaoqun Wang, Zhen Li, Ruimao Zhang.</div>
 				<div class="meta-row">
 					<span class="venue">MIDL</span>
 					<span class="year">2023</span>
-					<a class="pub-link" href="https://arxiv.org/pdf/2206.10571.pdf" target="_blank" rel="noopener">PDF →</a>
+					<a class="pub-link" href="https://arxiv.org/pdf/2206.10571.pdf" target="_blank" rel="noopener">PDF</a>
 				</div>
 			</article>
 
@@ -782,7 +769,7 @@
 
 	<!-- ===== Academic Services ===== -->
 	<section id="services">
-		<h3 class="section-heading">Academic Services</h3>
+		<h2 class="section-heading">Academic Services</h2>
 
 		<div class="services">
 
@@ -818,10 +805,10 @@
 
 	<!-- ===== Awards ===== -->
 	<section id="awards">
-		<h3 class="section-heading">Honors &amp; Awards</h3>
+		<h2 class="section-heading">Honors &amp; Awards</h2>
 		<ul class="awards">
-			<li><span class="ic">🏆</span><span>The First Prize Scholarship · 2018, 2019, 2020</span></li>
-			<li><span class="ic">🏆</span><span>National Scholarship · 2018</span></li>
+			<li><span>The First Prize Scholarship · 2018, 2019, 2020</span></li>
+			<li><span>National Scholarship · 2018</span></li>
 		</ul>
 	</section>
 
@@ -831,7 +818,7 @@
 			<script type='text/javascript' id='clustrmaps'
 				src='//cdn.clustrmaps.com/map_v2.js?cl=ffffff&w=400&t=tt&d=yqzHjRzsBJQtkz3lH1jgeuQAOnTiZWl3UFnWM5FeXZM&cmo=ff0000&cmn=ffb800&ct=ffffff'></script>
 		</div>
-		<div>&copy; Jie Yang · Last updated: May 2026</div>
+		<div>&copy; Jie Yang · Last updated: November 2026</div>
 	</footer>
 
 </main>
