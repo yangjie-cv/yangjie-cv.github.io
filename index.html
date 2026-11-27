@@ -20,458 +20,146 @@
 	<!-- Fonts -->
 	<link rel="preconnect" href="https://fonts.googleapis.com" />
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:wght@400;500;600&display=swap" rel="stylesheet" />
 
 	<style>
-		/* ---------- Theme ---------- */
-		:root {
-			--bg: #ffffff;
-			--surface: #ffffff;
-			--surface-2: #f6f8fb;
-			--text: #1a1d28;
-			--text-soft: #444a59;
-			--muted: #626b7c;
-			--border: #e8eaf0;
-			--border-strong: #d6d9e2;
-			--accent: #285eb3;
-			--accent-soft: #eaf1ff;
-			--accent-strong: #1f4fbb;
-			--highlight: #285eb3;
-			--venue-bg: #f0f4fa;
-			--venue-fg: #405a7c;
-			--shadow-sm: 0 1px 2px rgba(20, 25, 40, 0.04);
-			--shadow-md: 0 2px 12px rgba(20, 25, 40, 0.025);
-			--radius: 8px;
-		}
-		@media (prefers-color-scheme: dark) {
-			:root {
-				--bg: #0e1015;
-				--surface: #161922;
-				--surface-2: #1d2130;
-				--text: #e7e9ee;
-				--text-soft: #b8bdcb;
-				--muted: #8a90a2;
-				--border: #262b38;
-				--border-strong: #353b4c;
-				--accent: #6ea8ff;
-				--accent-soft: #1a2540;
-				--accent-strong: #9bbfff;
-				--highlight: #6ea8ff;
-				--venue-bg: #1d293c;
-				--venue-fg: #b1c6e2;
-				--shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
-				--shadow-md: 0 2px 12px rgba(0, 0, 0, 0.12);
-			}
-		}
+:root {
+  color-scheme: light dark;
+  --bg: #fff;
+  --surface: #f5f7f9;
+  --text: #20252b;
+  --text-soft: #414a55;
+  --muted: #656f7b;
+  --accent: #275c7a;
+  --accent-hover: #173f58;
+  --border: #dfe4e8;
+  --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 100px; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 1rem/1.72 var(--sans); -webkit-font-smoothing: antialiased; }
+a { color: var(--accent); text-decoration: none; text-underline-offset: 3px; }
+a:hover { color: var(--accent-hover); text-decoration: underline; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; }
+::selection { background: #dce9f3; color: #17212e; }
+.skip-link { position: fixed; top: -100px; left: 16px; z-index: 100; padding: 8px 16px; background: var(--bg); }
+.skip-link:focus { top: 12px; }
 
-		* { box-sizing: border-box; }
-		html { scroll-behavior: smooth; scroll-padding-top: 100px; }
-		body {
-			margin: 0;
-			background: var(--bg);
-			color: var(--text);
-			font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-			font-size: 16px;
-			line-height: 1.65;
-			-webkit-font-smoothing: antialiased;
-			-moz-osx-font-smoothing: grayscale;
-		}
-		a {
-			color: var(--accent);
-			text-decoration: none;
-			transition: color 0.15s ease;
-		}
-		a:hover { color: var(--accent-strong); text-decoration: underline; text-underline-offset: 3px; }
+/* A compact masthead and quiet navigation. */
+.nav { position: sticky; top: 0; z-index: 50; background: var(--bg); border-bottom: 1px solid var(--border); }
+.nav-inner { max-width: 1000px; margin: auto; padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.nav-brand { font: 600 1.125rem var(--serif); white-space: nowrap; }
+.nav-links { display: flex; flex-wrap: wrap; gap: 20px; }
+.nav-links a { color: var(--text-soft); font-size: .875rem; padding: 5px 0; }
+.nav-links a:hover { color: var(--accent); }
+.container { max-width: 1000px; margin: auto; padding: 0 24px 40px; }
+.hero { display: grid; grid-template-columns: minmax(0, 1fr) 180px; align-items: center; gap: 48px; padding: 44px 0 34px; border-bottom: 1px solid var(--border); }
+.hero h1 { margin: 0 0 10px; font: 600 3rem/1.1 var(--serif); letter-spacing: -.035em; }
+.hero h1 .zh { color: var(--text-soft); margin-left: 14px; font: 400 1.6rem var(--sans); letter-spacing: 0; vertical-align: middle; }
+.hero .role { margin: 0 0 12px; color: var(--text); font-weight: 500; }
+.hero .meta { color: var(--text-soft); font-size: .9375rem; }
+.hero .meta div { margin: 2px 0; }
+.hero .meta a { overflow-wrap: anywhere; }
+.social { display: flex; flex-wrap: wrap; gap: 20px; margin-top: 16px; }
+.social a { font-size: .875rem; font-weight: 500; }
+.avatar { display: block; width: 180px; height: 208px; object-fit: cover; border-radius: 3px; }
 
-		/* ---------- Top nav ---------- */
-		.nav {
-			position: sticky;
-			top: 0;
-			z-index: 50;
-			backdrop-filter: saturate(180%) blur(14px);
-			-webkit-backdrop-filter: saturate(180%) blur(14px);
-			background: color-mix(in srgb, var(--bg) 80%, transparent);
-			border-bottom: 1px solid var(--border);
-		}
-		.nav-inner {
-			max-width: 1000px;
-			margin: 0 auto;
-			padding: 12px 24px;
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			gap: 16px;
-		}
-		.nav-brand {
-			font-weight: 700;
-			letter-spacing: 0.2px;
-			color: var(--text);
-			display: flex;
-			align-items: center;
-			gap: 8px;
-		}
-		.nav-links { display: flex; gap: 4px; flex-wrap: wrap; }
-		.nav-links a {
-			color: var(--text-soft);
-			padding: 6px 12px;
-			border-radius: 8px;
-			font-weight: 500;
-			font-size: 0.92rem;
-		}
-		.nav-links a:hover {
-			background: var(--surface-2);
-			color: var(--text);
-			text-decoration: none;
-		}
+/* Reading rhythm, with serif headings and restrained color. */
+section { margin-top: 36px; }
+.section-heading { display: flex; align-items: baseline; flex-wrap: wrap; gap: 12px; margin: 0 0 18px; font: 600 1.65rem/1.3 var(--serif); letter-spacing: -.02em; }
+.section-heading .extra { margin-left: auto; font: 400 .875rem/1.5 var(--sans); letter-spacing: 0; }
+.bio { color: var(--text-soft); }
+.bio p { margin: 0 0 14px; }
+.bio b { font-weight: 600; color: var(--text); }
+.bio a, .news a, .service-card a { text-decoration: underline; }
+.interests { display: flex; flex-wrap: wrap; gap: 4px 18px; margin: 18px 0 0; }
+.chip { color: var(--muted); font-size: .875rem; }
+.recruit { margin-top: 18px; padding: 12px 16px; background: var(--surface); border-left: 2px solid var(--accent); color: var(--text-soft); font-size: .9375rem; }
+.recruit strong { color: var(--accent); font-weight: 600; }
+.news { list-style: none; padding: 0; margin: 0; }
+.news li { position: relative; padding: 5px 0 5px 16px; color: var(--text-soft); font-size: .9375rem; }
+.news li::before { content: "–"; position: absolute; left: 0; color: var(--muted); }
+.news b { font-weight: 600; color: var(--text); }
+.news time { color: var(--muted); font-size: .875rem; }
+.news-archive { margin: 10px 0 0 16px; }
+summary { cursor: pointer; width: fit-content; padding: 3px 0; color: var(--accent); font-size: .875rem; }
+.news-archive[open] summary { margin-bottom: 10px; }
 
-		/* ---------- Container ---------- */
-		.container {
-			max-width: 1000px;
-			margin: 0 auto;
-			padding: 36px 24px 80px;
-		}
+/* Publications read as a bibliography, grouped by year. */
+#publications { padding-top: 26px; border-top: 1px solid var(--border); }
+.pubs-note { margin: -6px 0 24px; color: var(--muted); font-size: .8125rem; }
+.pubs { display: flex; flex-direction: column; gap: 24px; }
+.pub-year-group { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 24px; border-top: 1px solid var(--border); padding-top: 20px; }
+.pub-year-heading { margin: 0; padding-top: 1px; font: 500 1.4rem/1.35 var(--serif); color: var(--muted); }
+.year-papers { min-width: 0; }
+.pub { padding: 0 0 24px; }
+.pub:last-child { padding-bottom: 2px; }
+.pub .title { margin: 0 0 5px; color: var(--text); font-size: 1.0625rem; line-height: 1.5; letter-spacing: -.015em; font-weight: 600; }
+.pub .title a { color: var(--text); }
+.pub .title a:hover { color: var(--accent); text-decoration: underline; }
+.pub .authors { color: var(--text-soft); font-size: .9375rem; line-height: 1.65; margin-bottom: 7px; }
+.pub .authors b { color: var(--text); font-weight: 600; }
+.pub .meta-row { display: flex; align-items: baseline; flex-wrap: wrap; gap: 14px; font-size: .875rem; }
+.venue { color: var(--text-soft); font-style: italic; }
+.pub-link { color: var(--accent); font-weight: 500; }
+.pub-link::before { content: "["; }
+.pub-link::after { content: "]"; }
+sup { font-size: .75em; }
 
-		/* ---------- Hero ---------- */
-		.hero {
-			display: grid;
-			grid-template-columns: minmax(0, 1fr) 220px;
-			gap: 40px;
-			align-items: center;
-			background: var(--surface);
-			border: 1px solid var(--border);
-			border-radius: var(--radius);
-			padding: 36px 40px;
-			box-shadow: var(--shadow-md);
-			position: relative;
-			overflow: hidden;
-		}
-		.hero::before {
-			display: none;
-		}
-		.hero h1 {
-			margin: 0 0 8px;
-			font-size: 2.2rem;
-			font-weight: 700;
-			letter-spacing: -0.025em;
-			line-height: 1.15;
-		}
-		.hero h1 .zh {
-			font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", serif;
-			font-weight: 600;
-			color: var(--text-soft);
-			margin-left: 8px;
-			font-size: 1.6rem;
-		}
-		.hero .role {
-			color: var(--text-soft);
-			font-weight: 500;
-			margin: 0 0 10px;
-			font-size: 1.05rem;
-		}
-		.hero .meta {
-			margin: 0 0 14px;
-			color: var(--text-soft);
-		}
-		.hero .meta div { margin: 2px 0; }
-		.hero img.avatar {
-			width: 200px; height: 200px;
-			object-fit: cover;
-			border-radius: 8px;
-			border: 1px solid var(--border);
-			position: relative; z-index: 1;
-		}
-		.social {
-			display: flex;
-			gap: 8px;
-			flex-wrap: wrap;
-			margin-top: 10px;
-		}
-		.social a {
-			display: inline-flex;
-			align-items: center;
-			padding: 6px 12px;
-			border-radius: 5px;
-			background: var(--surface);
-			color: var(--accent);
-			font-size: 0.875rem;
-			font-weight: 500;
-			border: 1px solid var(--border);
-			transition: background 0.15s ease;
-		}
-		.social a:hover {
-			background: var(--accent-soft);
-			color: var(--accent-strong);
-			text-decoration: none;
-			border-color: var(--accent);
-		}
+/* Academic service and awards use the same plain list language. */
+.services { display: grid; gap: 22px; }
+.service-card .role { color: var(--text); font-weight: 600; font-size: .9375rem; margin: 0 0 4px; }
+.service-card .body { color: var(--text-soft); }
+.venue-list { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-top: 8px; }
+.venue-tag { color: var(--text-soft); font-size: .875rem; }
+.awards { display: grid; grid-template-columns: 1fr; list-style: none; padding: 0; margin: 0; gap: 8px; }
+.awards li { color: var(--text-soft); padding-left: 16px; position: relative; }
+.awards li::before { content: "–"; position: absolute; left: 0; color: var(--muted); }
+footer { margin-top: 44px; padding-top: 20px; border-top: 1px solid var(--border); color: var(--muted); font-size: .8125rem; text-align: center; }
+#clustrmaps-widget { max-width: 220px; margin: 0 auto 16px; overflow: hidden; }
+#clustrmaps-widget img, #clustrmaps-widget iframe { max-width: 100%; }
 
-		/* ---------- Sections ---------- */
-		section { margin-top: 48px; }
-
-		.section-heading {
-			font-size: 1.45rem;
-			font-weight: 650;
-			margin: 0 0 18px;
-			letter-spacing: -0.02em;
-			color: var(--text);
-			display: flex;
-			align-items: baseline;
-			flex-wrap: wrap;
-			gap: 12px;
-		}
-		.section-heading .extra {
-			font-size: 0.88rem;
-			font-weight: 500;
-			color: var(--muted);
-			letter-spacing: normal;
-		}
-		.section-heading .extra a { color: var(--accent); }
-
-		/* ---------- Bio ---------- */
-		.bio { color: var(--text-soft); }
-		.bio p { margin: 0 0 12px; }
-		.interests {
-			display: flex;
-			flex-wrap: wrap;
-			gap: 6px 18px;
-			margin: 16px 0 4px;
-		}
-		.chip {
-			display: inline-flex;
-			align-items: center;
-			padding: 0;
-			color: var(--muted);
-			font-size: 0.875rem;
-			font-weight: 400;
-		}
-		.recruit {
-			margin-top: 18px;
-			padding: 12px 16px;
-			background: var(--surface-2);
-			border-left: 2px solid var(--accent);
-			border-radius: 0 4px 4px 0;
-			color: var(--text-soft);
-		}
-		.recruit strong { color: var(--highlight); }
-
-		/* ---------- News ---------- */
-		.news {
-			list-style: none;
-			padding: 0;
-			margin: 0;
-			border-left: 2px solid var(--border);
-		}
-		.news li {
-			position: relative;
-			padding: 7px 0 7px 22px;
-			color: var(--text-soft);
-		}
-		.news li::before {
-			content: "";
-			position: absolute;
-			left: -1px; top: 20px;
-			width: 8px; height: 1px;
-			background: var(--border-strong);
-		}
-		.news li.recent::before {
-			background: var(--accent);
-		}
-		.news li b { color: var(--text); }
-
-		/* ---------- Publications ---------- */
-		.pubs-note {
-			color: var(--muted);
-			font-size: 0.88rem;
-			margin: -6px 0 14px;
-		}
-		.pubs {
-			display: flex;
-			flex-direction: column;
-			gap: 0;
-		}
-		.pub {
-			padding: 20px 0;
-			border-bottom: 1px solid var(--border);
-			position: relative;
-		}
-		.pub:hover {
-			background: var(--surface-2);
-		}
-		.pub .title {
-			font-weight: 600;
-			color: var(--text);
-			font-size: 1.0625rem;
-			line-height: 1.5;
-			margin: 0 0 7px;
-		}
-		.pub .title a { color: var(--text); }
-		.pub .title a:hover { color: var(--accent); text-decoration: none; }
-		.pub .authors {
-			color: var(--text-soft);
-			font-size: 0.9375rem;
-			margin: 0 0 10px;
-			line-height: 1.6;
-		}
-		.pub .authors b { color: var(--text); font-weight: 700; }
-		.pub .meta-row {
-			display: flex;
-			flex-wrap: wrap;
-			align-items: center;
-			gap: 8px;
-			font-size: 0.86rem;
-		}
-		.venue {
-			display: inline-block;
-			padding: 2px 8px;
-			background: var(--venue-bg);
-			color: var(--venue-fg);
-			border-radius: 4px;
-			font-weight: 500;
-			font-size: 0.875rem;
-		}
-		.venue.preprint {
-			background: var(--surface-2);
-			color: var(--muted);
-		}
-		.venue.techreport {
-			background: var(--venue-bg);
-			color: var(--venue-fg);
-		}
-		.year {
-			color: var(--muted);
-			font-weight: 400;
-			font-family: "Inter", sans-serif;
-			font-size: 0.875rem;
-		}
-		.pub-link {
-			margin-left: auto;
-			padding: 3px 10px;
-			border: 1px solid var(--border);
-			border-radius: 4px;
-			background: var(--surface);
-			color: var(--accent);
-			font-weight: 500;
-			font-size: 0.875rem;
-		}
-		.pub-link:hover {
-			background: var(--accent-soft);
-			color: var(--accent-strong);
-			border-color: var(--accent);
-			text-decoration: none;
-		}
-
-		/* ---------- Services ---------- */
-		.services {
-			display: grid;
-			grid-template-columns: 1fr;
-			gap: 14px;
-		}
-		.service-card {
-			border-top: 1px solid var(--border);
-			padding: 18px 0;
-		}
-		.service-card .role {
-			font-size: 0.9375rem;
-			color: var(--text);
-			font-weight: 600;
-			margin: 0 0 8px;
-		}
-		.service-card .body {
-			color: var(--text-soft);
-			line-height: 1.55;
-		}
-		.service-card .body b { color: var(--text); }
-		.venue-list {
-			display: flex;
-			flex-wrap: wrap;
-			gap: 6px 18px;
-			margin-top: 8px;
-		}
-		.venue-tag {
-			padding: 0;
-			color: var(--text-soft);
-			font-size: 0.875rem;
-			font-weight: 400;
-		}
-
-		/* ---------- Awards ---------- */
-		.awards {
-			display: grid;
-			grid-template-columns: 1fr;
-			gap: 12px;
-			list-style: none;
-			padding: 0;
-			margin: 0;
-		}
-		.awards li {
-			border-top: 1px solid var(--border);
-			padding: 14px 0;
-			color: var(--text-soft);
-		}
-
-		/* ---------- Footer ---------- */
-		footer {
-			margin-top: 60px;
-			padding-top: 24px;
-			border-top: 1px solid var(--border);
-			text-align: center;
-			color: var(--muted);
-			font-size: 0.85rem;
-		}
-		footer #clustrmaps-widget {
-			width: 220px;
-			margin: 8px auto 12px;
-		}
-
-		/* ---------- Responsive ---------- */
-		@media (max-width: 760px) {
-			.hero {
-				grid-template-columns: 1fr;
-				text-align: center;
-				padding: 26px 22px;
-				gap: 22px;
-			}
-			.hero img.avatar {
-				width: 150px; height: 150px;
-				margin: 0 auto;
-				order: -1;
-			}
-			.hero .social { justify-content: center; }
-			.hero h1 { font-size: 1.7rem; }
-			.hero h1 .zh { font-size: 1.3rem; }
-			.interests { justify-content: center; }
-			.nav-links { gap: 0; }
-			.nav-links a { padding: 6px 8px; font-size: 0.85rem; }
-			.container { padding: 24px 16px 60px; }
-			.pub-link { margin-left: 0; }
-			.section-heading { font-size: 1.4rem; }
-		}
-
-		/* Focus, latest publication, and compact mobile navigation. */
-		.bio a, .news a, .service-card .body a { text-decoration: underline; text-underline-offset: 3px; }
-		.skip-link { position: fixed; top: -100px; left: 16px; z-index: 100; padding: 8px 16px; background: var(--surface); }
-		.skip-link:focus { top: 12px; }
-		:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
-		.pub.pub-latest {
-			padding: 18px 20px;
-			border: 1px solid var(--border);
-			border-left: 2px solid var(--accent);
-			border-radius: 4px;
-			background: var(--surface-2);
-			margin-bottom: 4px;
-		}
-		.pub.pub-latest .title a { color: var(--accent-strong); }
-		.news time { color: var(--muted); font-size: 0.875rem; }
-		@media (max-width: 540px) {
-			.nav-inner { flex-direction: column; gap: 6px; padding: 10px 16px; }
-			.nav-links { justify-content: center; }
-			.nav-links a { padding: 6px; }
-			.hero .meta { overflow-wrap: anywhere; }
-		}
-		@media (prefers-reduced-motion: reduce) {
-			html { scroll-behavior: auto; }
-			*, *::before, *::after { transition: none !important; }
-		}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #14171a; --surface: #1e242a; --text: #edf0f2; --text-soft: #c1c8cf; --muted: #9ca8b3; --accent: #94c4de; --accent-hover: #c1e1f2; --border: #333d46; }
+}
+@media (max-width: 700px) {
+  .nav-inner { gap: 8px; }
+  .nav-links { gap: 12px; }
+  .nav-brand { font-size: 1rem; }
+  .hero { grid-template-columns: minmax(0, 1fr) 140px; gap: 24px; }
+  .avatar { width: 140px; height: 168px; }
+  .hero h1 { font-size: 2.5rem; }
+  .hero h1 .zh { font-size: 1.3rem; margin-left: 8px; }
+  .pub-year-group { grid-template-columns: 48px minmax(0, 1fr); gap: 18px; }
+}
+@media (max-width: 500px) {
+  .container { padding: 0 20px 28px; }
+  .nav-inner { flex-direction: column; align-items: flex-start; padding: 10px 20px; gap: 4px; }
+  .nav-links { width: 100%; justify-content: space-between; gap: 8px; }
+  .nav-links a { font-size: .875rem; }
+  .hero { grid-template-columns: minmax(0, 1fr) 100px; gap: 18px; padding: 30px 0 26px; align-items: start; }
+  .hero h1 { font-size: 2.2rem; }
+  .hero h1 .zh { display: block; margin: 8px 0 0; font-size: 1.125rem; }
+  .hero .role, .hero .meta { font-size: .875rem; }
+  .avatar { width: 100px; height: 124px; margin-top: 4px; }
+  .social { gap: 8px 16px; }
+  .section-heading { font-size: 1.5rem; }
+  .section-heading .extra { width: 100%; margin-left: 0; }
+  .pub-year-group { grid-template-columns: 1fr; gap: 14px; padding-top: 16px; }
+  .pub-year-heading { font-size: 1.25rem; }
+  .pub { padding-bottom: 22px; }
+  .interests { gap: 4px 12px; }
+  section { margin-top: 30px; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+@media print {
+  :root { --bg: #fff; --text: #000; --text-soft: #222; --muted: #444; --accent: #222; --border: #ccc; }
+  .nav, .skip-link, #clustrmaps-widget { display: none; }
+  .container { max-width: none; padding: 0; }
+  .hero { padding-top: 0; }
+  .pub, .service-card { break-inside: avoid; }
+}
 	</style>
 </head>
 <body>
@@ -512,7 +200,7 @@
 				<a href="mailto:cvjieyang@tencent.com">Email</a>
 			</div>
 		</div>
-		<img class="avatar" src="./pic/yangjie.jpg" alt="Jie Yang" />
+		<img class="avatar" src="./pic/yangjie.jpg" alt="Jie Yang" width="180" height="208" fetchpriority="high" />
 	</header>
 
 	<!-- ===== Biography ===== -->
@@ -529,6 +217,8 @@
 				I received my Ph.D. from <b>The Chinese University of Hong Kong</b>, Shenzhen, advised by
 				<a href="http://www.zhangruimao.site/" target="_blank" rel="noopener">Prof. Ruimao Zhang</a>
 				and <a href="https://mypage.cuhk.edu.cn/academics/lizhen/" target="_blank" rel="noopener">Prof. Zhen Li</a>.
+			</p>
+			<p>
 				During my Ph.D. (2021–2025), I worked toward intelligent agents that can collaborate
 				with humans in dynamic environments, exploring three closely connected directions:
 				(1) human-centric visual understanding and reasoning, with a focus on
@@ -570,199 +260,205 @@
 			<li>One paper is accepted to <b>NeurIPS 2025</b>.</li>
 			<li>We present <a href="https://www.arxiv.org/pdf/2506.07905" target="_blank" rel="noopener">WeThink</a> for general-purpose vision-language reasoning.</li>
 			<li>One paper is accepted to <b>T-PAMI</b>.</li>
-			<li>One paper is accepted to <b>CVPR 2025</b>.</li>
-			<li>One paper is accepted to <b>ICRA 2025</b>.</li>
-			<li>One paper is accepted to <b>NeurIPS 2024</b>.</li>
-			<li><a href="https://arxiv.org/abs/2303.05499" target="_blank" rel="noopener">Grounding DINO</a> is selected as <a href="https://www.paperdigest.org/2024/09/most-influential-eccv-papers-2024-09/" target="_blank" rel="noopener">The Most Influential Paper</a> in ECCV 2024.</li>
-			<li>Three papers are accepted to <b>ECCV 2024</b>.</li>
-			<li>One paper is accepted to <b>CVPR 2024</b>.</li>
-			<li>We present <a href="https://arxiv.org/pdf/2310.08530.pdf" target="_blank" rel="noopener">X-Pose</a> to detect any keypoints of any objects.</li>
-			<li><a href="https://github.com/IDEA-Research/Grounded-Segment-Anything" target="_blank" rel="noopener">Grounded SAM</a> is accepted to <b>ICCV 2023 Demo Track</b>.</li>
-			<li>One paper is accepted to <b>ICCV 2023</b>.</li>
-			<li>Two papers are accepted to <b>MIDL 2023</b>, one rated as oral presentation.</li>
-			<li>One paper is accepted to <b>CVPR 2023</b>.</li>
-			<li>One paper is accepted to <b>ICLR 2023</b>.</li>
-			<li>One paper is accepted to <b>NeurIPS 2022</b>.</li>
 		</ul>
+		<details class="news-archive">
+			<summary>Earlier updates</summary>
+			<ul class="news">
+				<li>One paper is accepted to <b>CVPR 2025</b>.</li>
+				<li>One paper is accepted to <b>ICRA 2025</b>.</li>
+				<li>One paper is accepted to <b>NeurIPS 2024</b>.</li>
+				<li><a href="https://arxiv.org/abs/2303.05499" target="_blank" rel="noopener">Grounding DINO</a> is selected as <a href="https://www.paperdigest.org/2024/09/most-influential-eccv-papers-2024-09/" target="_blank" rel="noopener">The Most Influential Paper</a> in ECCV 2024.</li>
+				<li>Three papers are accepted to <b>ECCV 2024</b>.</li>
+				<li>One paper is accepted to <b>CVPR 2024</b>.</li>
+				<li>We present <a href="https://arxiv.org/pdf/2310.08530.pdf" target="_blank" rel="noopener">X-Pose</a> to detect any keypoints of any objects.</li>
+				<li><a href="https://github.com/IDEA-Research/Grounded-Segment-Anything" target="_blank" rel="noopener">Grounded SAM</a> is accepted to <b>ICCV 2023 Demo Track</b>.</li>
+				<li>One paper is accepted to <b>ICCV 2023</b>.</li>
+				<li>Two papers are accepted to <b>MIDL 2023</b>, one rated as oral presentation.</li>
+				<li>One paper is accepted to <b>CVPR 2023</b>.</li>
+				<li>One paper is accepted to <b>ICLR 2023</b>.</li>
+				<li>One paper is accepted to <b>NeurIPS 2022</b>.</li>
+			</ul>
+		</details>
 	</section>
 
 	<!-- ===== Publications ===== -->
 	<section id="publications">
-		<h2 class="section-heading">Selected Publications <span class="extra">[<a href="https://scholar.google.com/citations?user=UVzG9IcAAAAJ&hl=zh-CN" target="_blank" rel="noopener">Full list on Google Scholar</a>]</span></h2>
+		<h2 class="section-heading">Selected Publications <span class="extra"><a href="https://scholar.google.com/citations?user=UVzG9IcAAAAJ&hl=zh-CN" target="_blank" rel="noopener">Full list on Google Scholar</a></span></h2>
 		<p class="pubs-note" id="publication-notes"><sup>*</sup> core contributors &nbsp;·&nbsp; <sup>#</sup> corresponding author</p>
 
 		<div class="pubs">
-
-			<article class="pub pub-latest" id="wemm-video" aria-labelledby="wemm-title">
-				<h3 class="title" id="wemm-title"><a href="https://arxiv.org/pdf/2611.26409" target="_blank" rel="noopener">WeMM-Video: Pushing the Frontiers of Open-Source Omni-Modal Video Understanding</a></h3>
+			<div class="pub-year-group" role="group" aria-labelledby="year-2026">
+				<h3 class="pub-year-heading" id="year-2026">2026</h3>
+				<div class="year-papers">
+					<article class="pub pub-latest" id="wemm-video" aria-labelledby="wemm-title">
+				<h4 class="title" id="wemm-title"><a href="https://arxiv.org/pdf/2611.26409" target="_blank" rel="noopener">WeMM-Video: Pushing the Frontiers of Open-Source Omni-Modal Video Understanding</a></h4>
 				<div class="authors" aria-describedby="publication-notes">Changli Tang<sup>*</sup>, <b>Jie Yang</b><sup>*</sup>, Tianyi Wang<sup>*</sup>, Lei Li<sup>*</sup>, Daoze Zhang<sup>*</sup>, Zijie Xin<sup>*</sup>, Zhan Liu, Li Li, Jinchang Xu, Fengyun Rao, Chao Zhang, Jing Lyu.</div>
 				<div class="meta-row">
 					<span class="venue techreport">Technical report</span>
-					<span class="year">2026</span>
 					<a class="pub-link" href="https://arxiv.org/pdf/2611.26409" target="_blank" rel="noopener">PDF</a>
 				</div>
 			</article>
 
-			<article class="pub" id="spoken-intentions">
-				<h3 class="title"><a href="https://arxiv.org/pdf/2611.24706" target="_blank" rel="noopener">Can Omni-modal LLMs Understand Spoken Intentions?</a></h3>
+					<article class="pub" id="spoken-intentions">
+				<h4 class="title"><a href="https://arxiv.org/pdf/2611.24706" target="_blank" rel="noopener">Can Omni-modal LLMs Understand Spoken Intentions?</a></h4>
 				<div class="authors">Zijie Xin, Tianyi Wang, Daoze Zhang, <b>Jie Yang</b>, Changli Tang, Qijie Wei, Fengyun Rao, Xirong Li.</div>
 				<div class="meta-row">
 					<span class="venue preprint">arXiv preprint</span>
-					<span class="year">2026</span>
 					<a class="pub-link" href="https://arxiv.org/pdf/2611.24706" target="_blank" rel="noopener">PDF</a>
 				</div>
 			</article>
 
-			<article class="pub">
-				<h3 class="title"><a href="https://arxiv.org/pdf/2605.20035v1" target="_blank" rel="noopener">Stage-adaptive Token Selection for Efficient Omni-modal LLMs</a></h3>
+					<article class="pub">
+				<h4 class="title"><a href="https://arxiv.org/pdf/2605.20035v1" target="_blank" rel="noopener">Stage-adaptive Token Selection for Efficient Omni-modal LLMs</a></h4>
 				<div class="authors">Zijie Xin, <b>Jie Yang</b><sup>#</sup>, Ruixiang Zhao, Tianyi Wang, Fengyun Rao, Jing LYU, Xirong Li<sup>#</sup>.</div>
 				<div class="meta-row">
 					<span class="venue preprint">arXiv preprint</span>
-					<span class="year">2026</span>
 					<a class="pub-link" href="https://arxiv.org/pdf/2605.20035v1" target="_blank" rel="noopener">PDF</a>
 				</div>
 			</article>
 
-			<article class="pub">
-				<h3 class="title"><a href="https://arxiv.org/pdf/2605.18577v1" target="_blank" rel="noopener">OmniPro: A Comprehensive Benchmark for Omni-Proactive Streaming Video Understanding</a></h3>
+					<article class="pub">
+				<h4 class="title"><a href="https://arxiv.org/pdf/2605.18577v1" target="_blank" rel="noopener">OmniPro: A Comprehensive Benchmark for Omni-Proactive Streaming Video Understanding</a></h4>
 				<div class="authors">Ruixiang Zhao, <b>Jie Yang</b><sup>#</sup>, Zijie Xin, Tianyi Wang, Fengyun Rao, Jing LYU, Xirong Li<sup>#</sup>.</div>
 				<div class="meta-row">
 					<span class="venue preprint">arXiv preprint</span>
-					<span class="year">2026</span>
 					<a class="pub-link" href="https://arxiv.org/pdf/2605.18577v1" target="_blank" rel="noopener">PDF</a>
 				</div>
 			</article>
+				</div>
+			</div>
 
-			<article class="pub">
-				<h3 class="title"><a href="https://www.arxiv.org/pdf/2506.07905" target="_blank" rel="noopener">WeThink: Toward General-purpose Vision-Language Reasoning via Reinforcement Learning</a></h3>
+			<div class="pub-year-group" role="group" aria-labelledby="year-2025">
+				<h3 class="pub-year-heading" id="year-2025">2025</h3>
+				<div class="year-papers">
+					<article class="pub">
+				<h4 class="title"><a href="https://www.arxiv.org/pdf/2506.07905" target="_blank" rel="noopener">WeThink: Toward General-purpose Vision-Language Reasoning via Reinforcement Learning</a></h4>
 				<div class="authors"><b>Jie Yang</b>, Feipeng Ma, Zitian Wang, Dacheng Yin, Kang Rong, Fengyun Rao, Ruimao Zhang.</div>
 				<div class="meta-row">
 					<span class="venue techreport">Tech Report</span>
-					<span class="year">2025</span>
 					<a class="pub-link" href="https://www.arxiv.org/pdf/2506.07905" target="_blank" rel="noopener">PDF</a>
 				</div>
 			</article>
 
-			<article class="pub">
-				<h3 class="title"><a href="https://arxiv.org/pdf/2506.09049" target="_blank" rel="noopener">VIKI-R: Coordinating Embodied Multi-Agent Cooperation via Reinforcement Learning</a></h3>
+					<article class="pub">
+				<h4 class="title"><a href="https://arxiv.org/pdf/2506.09049" target="_blank" rel="noopener">VIKI-R: Coordinating Embodied Multi-Agent Cooperation via Reinforcement Learning</a></h4>
 				<div class="authors">Li Kang, Xiufeng Song, Heng Zhou, Yiran Qin, <b>Jie Yang</b>, Xiaohong Liu, Philip Torr, Lei Bai, Zhenfei Yin.</div>
 				<div class="meta-row">
 					<span class="venue">NeurIPS D&amp;B</span>
-					<span class="year">2025</span>
 					<a class="pub-link" href="https://arxiv.org/pdf/2506.09049" target="_blank" rel="noopener">PDF</a>
 				</div>
 			</article>
 
-			<article class="pub">
-				<h3 class="title"><a href="https://ieeexplore.ieee.org/document/10945344" target="_blank" rel="noopener">ED-Pose++: Enhanced Explicit Box Detection for Conventional and Interactive Multi-Object Keypoint Detection</a></h3>
+					<article class="pub">
+				<h4 class="title"><a href="https://ieeexplore.ieee.org/document/10945344" target="_blank" rel="noopener">ED-Pose++: Enhanced Explicit Box Detection for Conventional and Interactive Multi-Object Keypoint Detection</a></h4>
 				<div class="authors"><b>Jie Yang</b>, Ailing Zeng, Tianhe Ren, Shilong Liu, Feng Li, Ruimao Zhang, Lei Zhang.</div>
 				<div class="meta-row">
 					<span class="venue">T-PAMI</span>
-					<span class="year">2025</span>
 					<a class="pub-link" href="https://ieeexplore.ieee.org/document/10945344" target="_blank" rel="noopener">IEEE</a>
 				</div>
 			</article>
 
-			<article class="pub">
-				<h3 class="title"><a href="https://arxiv.org/pdf/2505.24315" target="_blank" rel="noopener">InteractAnything: Zero-shot Human Object Interaction Synthesis via LLM Feedback and Object Affordance Parsing</a></h3>
+					<article class="pub">
+				<h4 class="title"><a href="https://arxiv.org/pdf/2505.24315" target="_blank" rel="noopener">InteractAnything: Zero-shot Human Object Interaction Synthesis via LLM Feedback and Object Affordance Parsing</a></h4>
 				<div class="authors">Jinlu Zhang, Yixin Chen, Zan Wang, <b>Jie Yang</b>, Yizhou Wang, Siyuan Huang.</div>
 				<div class="meta-row">
 					<span class="venue">CVPR</span>
-					<span class="year">2025</span>
 					<a class="pub-link" href="https://arxiv.org/pdf/2505.24315" target="_blank" rel="noopener">PDF</a>
 				</div>
 			</article>
 
-			<article class="pub">
-				<h3 class="title"><a href="https://arxiv.org/pdf/2503.10586" target="_blank" rel="noopener">Unlock the Power of Unlabeled Data in Language Driving Model</a></h3>
+					<article class="pub">
+				<h4 class="title"><a href="https://arxiv.org/pdf/2503.10586" target="_blank" rel="noopener">Unlock the Power of Unlabeled Data in Language Driving Model</a></h4>
 				<div class="authors">Chaoqun Wang, <b>Jie Yang</b>, Xiaobin Hong, Ruimao Zhang.</div>
 				<div class="meta-row">
 					<span class="venue">ICRA</span>
-					<span class="year">2025</span>
 					<a class="pub-link" href="https://arxiv.org/pdf/2503.10586" target="_blank" rel="noopener">PDF</a>
 				</div>
 			</article>
+				</div>
+			</div>
 
-			<article class="pub">
-				<h3 class="title"><a href="https://arxiv.org/pdf/2411.01846" target="_blank" rel="noopener">KptLLM: Unveiling the Power of Large Language Model for Keypoint Comprehension</a></h3>
+			<div class="pub-year-group" role="group" aria-labelledby="year-2024">
+				<h3 class="pub-year-heading" id="year-2024">2024</h3>
+				<div class="year-papers">
+					<article class="pub">
+				<h4 class="title"><a href="https://arxiv.org/pdf/2411.01846" target="_blank" rel="noopener">KptLLM: Unveiling the Power of Large Language Model for Keypoint Comprehension</a></h4>
 				<div class="authors"><b>Jie Yang</b>, Wang Zeng, Sheng Jin, Lumin Xu, Wentao Liu, Chen Qian, Ruimao Zhang.</div>
 				<div class="meta-row">
 					<span class="venue">NeurIPS</span>
-					<span class="year">2024</span>
 					<a class="pub-link" href="https://arxiv.org/pdf/2411.01846" target="_blank" rel="noopener">PDF</a>
 				</div>
 			</article>
 
-			<article class="pub">
-				<h3 class="title"><a href="https://arxiv.org/pdf/2310.08530.pdf" target="_blank" rel="noopener">X-Pose: Detecting Any Keypoints</a></h3>
+					<article class="pub">
+				<h4 class="title"><a href="https://arxiv.org/pdf/2310.08530.pdf" target="_blank" rel="noopener">X-Pose: Detecting Any Keypoints</a></h4>
 				<div class="authors"><b>Jie Yang</b>, Ailing Zeng, Ruimao Zhang, Lei Zhang.</div>
 				<div class="meta-row">
 					<span class="venue">ECCV</span>
-					<span class="year">2024</span>
 					<a class="pub-link" href="https://arxiv.org/pdf/2310.08530.pdf" target="_blank" rel="noopener">PDF</a>
 				</div>
 			</article>
 
-			<article class="pub">
-				<h3 class="title"><a href="https://arxiv.org/pdf/2407.12435" target="_blank" rel="noopener">F-HOI: Toward Fine-grained Semantic-Aligned 3D Human-Object Interactions</a></h3>
+					<article class="pub">
+				<h4 class="title"><a href="https://arxiv.org/pdf/2407.12435" target="_blank" rel="noopener">F-HOI: Toward Fine-grained Semantic-Aligned 3D Human-Object Interactions</a></h4>
 				<div class="authors"><b>Jie Yang</b>, Xuesong Niu, Nan Jiang, Ruimao Zhang, Siyuan Huang.</div>
 				<div class="meta-row">
 					<span class="venue">ECCV</span>
-					<span class="year">2024</span>
 					<a class="pub-link" href="https://arxiv.org/pdf/2407.12435" target="_blank" rel="noopener">PDF</a>
 				</div>
 			</article>
 
-			<article class="pub">
-				<h3 class="title"><a href="https://arxiv.org/pdf/2406.07221" target="_blank" rel="noopener">Open-World Human-Object Interaction Detection via Multi-modal Prompts</a></h3>
+					<article class="pub">
+				<h4 class="title"><a href="https://arxiv.org/pdf/2406.07221" target="_blank" rel="noopener">Open-World Human-Object Interaction Detection via Multi-modal Prompts</a></h4>
 				<div class="authors"><b>Jie Yang</b>, Bingliang Li, Ailing Zeng, Lei Zhang, Ruimao Zhang.</div>
 				<div class="meta-row">
 					<span class="venue">CVPR</span>
-					<span class="year">2024</span>
 					<a class="pub-link" href="https://arxiv.org/pdf/2406.07221" target="_blank" rel="noopener">PDF</a>
 				</div>
 			</article>
+				</div>
+			</div>
 
-			<article class="pub">
-				<h3 class="title"><a href="https://openaccess.thecvf.com/content/ICCV2023/papers/Yang_Neural_Interactive_Keypoint_Detection_ICCV_2023_paper.pdf" target="_blank" rel="noopener">Neural Interactive Keypoint Detection</a></h3>
+			<div class="pub-year-group" role="group" aria-labelledby="year-2023">
+				<h3 class="pub-year-heading" id="year-2023">2023</h3>
+				<div class="year-papers">
+					<article class="pub">
+				<h4 class="title"><a href="https://openaccess.thecvf.com/content/ICCV2023/papers/Yang_Neural_Interactive_Keypoint_Detection_ICCV_2023_paper.pdf" target="_blank" rel="noopener">Neural Interactive Keypoint Detection</a></h4>
 				<div class="authors"><b>Jie Yang</b>, Ailing Zeng, Feng Li, Shilong Liu, Ruimao Zhang, Lei Zhang.</div>
 				<div class="meta-row">
 					<span class="venue">ICCV</span>
-					<span class="year">2023</span>
 					<a class="pub-link" href="https://openaccess.thecvf.com/content/ICCV2023/papers/Yang_Neural_Interactive_Keypoint_Detection_ICCV_2023_paper.pdf" target="_blank" rel="noopener">PDF</a>
 				</div>
 			</article>
 
-			<article class="pub">
-				<h3 class="title"><a href="https://openaccess.thecvf.com/content/CVPR2023/papers/Yang_Semantic_Human_Parsing_via_Scalable_Semantic_Transfer_Over_Multiple_Label_CVPR_2023_paper.pdf" target="_blank" rel="noopener">Semantic Human Parsing via Scalable Semantic Transfer over Multiple Label Domains</a></h3>
+					<article class="pub">
+				<h4 class="title"><a href="https://openaccess.thecvf.com/content/CVPR2023/papers/Yang_Semantic_Human_Parsing_via_Scalable_Semantic_Transfer_Over_Multiple_Label_CVPR_2023_paper.pdf" target="_blank" rel="noopener">Semantic Human Parsing via Scalable Semantic Transfer over Multiple Label Domains</a></h4>
 				<div class="authors"><b>Jie Yang</b>, Chaoqun Wang, Zhen Li, Junle Wang, Ruimao Zhang.</div>
 				<div class="meta-row">
 					<span class="venue">CVPR</span>
-					<span class="year">2023</span>
 					<a class="pub-link" href="https://openaccess.thecvf.com/content/CVPR2023/papers/Yang_Semantic_Human_Parsing_via_Scalable_Semantic_Transfer_Over_Multiple_Label_CVPR_2023_paper.pdf" target="_blank" rel="noopener">PDF</a>
 				</div>
 			</article>
 
-			<article class="pub">
-				<h3 class="title"><a href="https://arxiv.org/pdf/2302.01593.pdf" target="_blank" rel="noopener">Explicit Box Detection Unifies End-to-End Multi-Person Pose Estimation</a></h3>
+					<article class="pub">
+				<h4 class="title"><a href="https://arxiv.org/pdf/2302.01593.pdf" target="_blank" rel="noopener">Explicit Box Detection Unifies End-to-End Multi-Person Pose Estimation</a></h4>
 				<div class="authors"><b>Jie Yang</b>, Ailing Zeng, Shilong Liu, Feng Li, Ruimao Zhang, Lei Zhang.</div>
 				<div class="meta-row">
 					<span class="venue">ICLR</span>
-					<span class="year">2023</span>
 					<a class="pub-link" href="https://arxiv.org/pdf/2302.01593.pdf" target="_blank" rel="noopener">PDF</a>
 				</div>
 			</article>
 
-			<article class="pub">
-				<h3 class="title"><a href="https://arxiv.org/pdf/2206.10571.pdf" target="_blank" rel="noopener">Toward Unpaired Multi-modal Medical Image Segmentation via Learning Structured Semantic Consistency</a></h3>
+					<article class="pub">
+				<h4 class="title"><a href="https://arxiv.org/pdf/2206.10571.pdf" target="_blank" rel="noopener">Toward Unpaired Multi-modal Medical Image Segmentation via Learning Structured Semantic Consistency</a></h4>
 				<div class="authors"><b>Jie Yang</b>, Ye Zhu, Chaoqun Wang, Zhen Li, Ruimao Zhang.</div>
 				<div class="meta-row">
 					<span class="venue">MIDL</span>
-					<span class="year">2023</span>
 					<a class="pub-link" href="https://arxiv.org/pdf/2206.10571.pdf" target="_blank" rel="noopener">PDF</a>
 				</div>
 			</article>
-
+				</div>
+			</div>
 		</div>
 	</section>
 
